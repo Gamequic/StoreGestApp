@@ -1,8 +1,11 @@
 import { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, TextInput } from 'react-native';
+import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
+import { Image } from 'expo-image';
 
 import Button from '../components/Button';
+
 import ThemeContext from './../ThemeContext';
 
 import LANG from './../../lang';
@@ -15,18 +18,22 @@ function LogIn() {
 
   return (
     <View style={styles.container}>
-      <Text>Bienvenido a la aplicacion</Text>
+      <Text style={styles.title} >{LANG[currentLang].Welcome}</Text>
+      <Image
+        style={styles.image}
+        source={require('./../../assets/icon.png')}
+      />
       <TextInput
         style={styles.input}
         placeholder={LANG[currentLang].User}
       />
       <TextInput
         style={styles.input}
-        placeholder="Contrsenna"
+        placeholder={LANG[currentLang].Password}
       />
-      <Button onPress={() => {console.log(currentLang)}}>Iniciar sesion</Button>
-      <Button onPress={() => {setcurrentLang("ES")}}>es</Button>
-      <Button onPress={() => {setcurrentLang("US")}}>us</Button>
+      <Button
+        title={LANG[currentLang].LogIn}
+      />
       <StatusBar style="auto" />
     </View>
   );

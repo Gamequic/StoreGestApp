@@ -1,7 +1,7 @@
 # Checklist
 
 * [X] Lenguages
-* [ ] Log in
+* [X] Log in
 * [ ] Home
 * [ ] Colors
-* [ ] Styling
+* [X] Styling

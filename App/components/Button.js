@@ -1,37 +1,39 @@
-/*
-  Button from:
-  https://docs.expo.dev/ui-programming/react-native-styling-buttons/
+import React, { useContext, useRef } from 'react';
+import { Text, Pressable, Animated } from 'react-native';
 
-  Differences:
-  - title was change to children
-*/
+import ThemeContext from '../ThemeContext';
 
-import React from 'react';
-import { Text, StyleSheet, Pressable } from 'react-native';
+function Button({ onPress, title }) {
+    const { styles } = useContext(ThemeContext);
 
-export default function Button({ children, onPress }) {
-  return (
-    <Pressable style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{children}</Text>
-    </Pressable>
-  );
+    const scaleValue = useRef(new Animated.Value(1)).current;
+
+    const handlePressIn = () => {
+        Animated.spring(scaleValue, {
+            toValue: 1.1,
+            useNativeDriver: true,
+        }).start();
+    };
+
+    const handlePressOut = () => {
+        Animated.spring(scaleValue, {
+            toValue: 1,
+            useNativeDriver: true,
+        }).start();
+    };
+
+    return (
+        <Animated.View style={{ transform: [{ scale: scaleValue }] }}>
+            <Pressable
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+                onPress={onPress}
+                style={styles.button}
+            >
+                    <Text style={styles.text}>{title}</Text>
+            </Pressable>
+        </Animated.View>
+    );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    backgroundColor: 'black',
-  },
-  text: {
-    fontSize: 16,
-    lineHeight: 21,
-    fontWeight: 'bold',
-    letterSpacing: 0.25,
-    color: 'white',
-  },
-});
+export default Button;
