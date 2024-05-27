@@ -3,5 +3,10 @@
 * [X] Lenguages
 * [X] Log in
 * [ ] Home
-* [ ] Colors
-* [X] Styling
+* [X] Colors
+* [ ] Styling
+* [ ] Backend
+    * [ ] Log in
+    * [ ] Home
+    * [ ] CRUD products
+    * [ ] CRUD Orders
