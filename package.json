@@ -11,14 +11,14 @@
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/hooks": "^3.0.0",
+    "@react-navigation/bottom-tabs": "^6.5.20",
     "expo": "~51.0.8",
     "expo-file-system": "~17.0.1",
     "expo-image": "~1.12.9",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-native": "0.74.1",
-    "react-native-reanimated": "~3.10.1",
-    "xlsx": "^0.18.5"
+    "react-native-reanimated": "~3.10.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

@@ -2,7 +2,11 @@
 
 * [X] Lenguages
 * [X] Log in
-* [ ] Home
+* [X] Navigation tab
+* [ ] Tabs
+    * [ ] Dashboard
+    * [ ] Products
+    * [ ] Orders
 * [X] Colors
 * [ ] Styling
 * [ ] Backend

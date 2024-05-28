@@ -10,7 +10,7 @@ import ThemeContext from './../ThemeContext';
 
 import LANG from './../../lang';
 
-function LogIn() {
+function LogIn({ setLogin }) {
   const {
     currentLang, setcurrentLang,
     styles
@@ -33,6 +33,7 @@ function LogIn() {
       />
       <Button
         title={LANG[currentLang].LogIn}
+        onPress={() => {setLogin(true)}}
       />
       <StatusBar style="auto" />
     </View>
