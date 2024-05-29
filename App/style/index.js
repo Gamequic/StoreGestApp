@@ -4,8 +4,10 @@ const colors = {
   background: '#fffff0',
 
   red: "#CE430B",
+  green: '#36EC1D',
 
   textInput: '#F9F3ED',
+  button: '#DE925A',
 
   desert1: '#e9ac6d',
   desert2: '#eec185',
@@ -34,7 +36,16 @@ const styles = StyleSheet.create({
       height: 120,
       borderRadius: 18,
     },
-    button: {
+    buttonPrimary: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 12,
+      paddingHorizontal: 32,
+      borderRadius: 4,
+      elevation: 3,
+      backgroundColor: colors.button,
+    },
+    buttonBigRed: {
       alignItems: 'center',
       justifyContent: 'center',
       paddingVertical: 12,
@@ -42,6 +53,21 @@ const styles = StyleSheet.create({
       borderRadius: 4,
       elevation: 3,
       backgroundColor: colors.red,
+      width: 250,
+      height: 200,
+      margin: 10
+    },
+    buttonBigGreen: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 12,
+      paddingHorizontal: 32,
+      borderRadius: 4,
+      elevation: 3,
+      backgroundColor: colors.green,
+      width: 250,
+      height: 200,
+      margin: 10
     },
     text: {
       fontSize: 16,
@@ -52,6 +78,10 @@ const styles = StyleSheet.create({
     },
     title: {
       fontSize: 32
+    },
+    titleWhite: {
+      fontSize: 32,
+      color: 'white'
     }
   }
 );

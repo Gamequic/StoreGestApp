@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TextInput } from 'react-native';
+import { Text, View } from 'react-native';
 
 import ThemeContext from '../ThemeContext';
 

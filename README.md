@@ -7,6 +7,10 @@
     * [ ] Dashboard
     * [ ] Products
     * [ ] Orders
+    * [ ] Money
+        * [X] Dashboard
+        * [ ] Record
+        * [ ] Update
 * [X] Colors
 * [ ] Styling
 * [ ] Backend
@@ -14,3 +18,4 @@
     * [ ] Home
     * [ ] CRUD products
     * [ ] CRUD Orders
+    * [ ] CRUD Money

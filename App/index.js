@@ -17,7 +17,7 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // await saveData('Lang', 'ES');
+        await saveData('Lang', 'ES');
         const storedLang = await getData('Lang') || 'ES';
         setCurrentLang(storedLang);
       } catch (error) {
