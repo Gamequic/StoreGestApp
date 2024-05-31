@@ -3,6 +3,7 @@ const LANG = {
         "Welcome": "Bienvenido",
         "User": "Usuario",
         "Password": "Contraseña",
+        "Close": "Cerrar",
         "LogIn": "Iniciar sesión",
         "Dashboard": "Panel principal",
         "Meal": "Comida",
@@ -11,12 +12,17 @@ const LANG = {
         "DepositMoney": "Depositar dinero",
         "Withdrawals": "Retiros",
         "Record": "Registro",
-        "Balance": "Saldo"
+        "Balance": "Saldo",
+        "Date": "Fecha",
+        "Amount": "Cantidad",
+        "Reason": "Razón",
+        "Description": "Descripción",
     },
     "US": {
         "Welcome": "Welcome",
         "User": "User",
         "Password": "Password",
+        "Close": "Close",
         "LogIn": "Log in",
         "Dashboard": "Dashboard",
         "Meal": "Meal",
@@ -25,7 +31,11 @@ const LANG = {
         "DepositMoney": "Deposit Money",
         "Withdrawals": "Withdrawals",
         "Record": "Record",
-        "Balance": "Balance"
+        "Balance": "Balance",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Reason": "Reason",
+        "Description": "Description",
     }
 }
 

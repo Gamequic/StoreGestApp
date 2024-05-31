@@ -8,7 +8,7 @@ import FoodScreen from './../screens/Food';
 import OrdersScreen from './../screens/Orders';
 import MoneyScreen from './../screens/Money';
 import MoneyRecord from './../screens/Money/Record';
-import MoneyUpdate from '../screens/Money/Update';
+import MoneyCreate from '../screens/Money/Create';
 
 import ThemeContext from './../ThemeContext';
 import LANG from './../../lang';
@@ -26,7 +26,7 @@ function MoneyStackScreen() {
     >
       <MoneyStack.Screen name="Money" component={MoneyScreen} />
       <MoneyStack.Screen name="MoneyRecord" component={MoneyRecord} />
-      <MoneyStack.Screen name='MoneyUpdate' component={MoneyUpdate} />
+      <MoneyStack.Screen name='MoneyCreate' component={MoneyCreate} />
     </MoneyStack.Navigator>
   );
 }

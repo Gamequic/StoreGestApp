@@ -4,7 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import ThemeContext from '../ThemeContext';
 
-function Button({ icon, type, onPress, title }) {
+function Button({ icon, type, onPress, title, children }) {
     const { styles } = useContext(ThemeContext);
 
     const scaleValue = useRef(new Animated.Value(1)).current;
@@ -36,6 +36,19 @@ function Button({ icon, type, onPress, title }) {
                 >
                     <Text style={styles.titleWhite}>{title}</Text>
                     <MaterialCommunityIcons name={icon} color={'#ffffff'} size={64} />
+                </Pressable>
+            </Animated.View>
+        )
+    } else if (type === 'pressable') {
+        return (
+            <Animated.View style={{ transform: [{ scale: scaleValue }] }}>
+                <Pressable
+                    onPressIn={handlePressIn}
+                    onPressOut={handlePressOut}
+                    onPress={onPress}
+                    style={buttonStyle}
+                >
+                    {children}
                 </Pressable>
             </Animated.View>
         )

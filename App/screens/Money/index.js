@@ -21,13 +21,13 @@ function MoneyScreen({ navigation }) {
         title={LANG[currentLang].DepositMoney}
         type={'buttonBigGreen'}
         icon={'cash-plus'}
-        onPress={() => navigation.navigate('MoneyUpdate')}
+        onPress={() => navigation.navigate('MoneyCreate')}
       />
       <Button
         title={LANG[currentLang].Withdrawals}
         type={'buttonBigRed'}
         icon={'cash-minus'}
-        onPress={() => navigation.navigate('MoneyUpdate')}
+        onPress={() => navigation.navigate('MoneyCreate')}
       />
       <Button
         title={LANG[currentLang].Record}

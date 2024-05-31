@@ -23,6 +23,12 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    containerH: {
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: colors.background,
+      justifyContent: 'center'
+    },
     input: {
       height: "1rem",
       width: "80%",
@@ -57,6 +63,7 @@ const styles = StyleSheet.create({
       height: 200,
       margin: 10
     },
+    pressable: {},
     buttonBigGreen: {
       alignItems: 'center',
       justifyContent: 'center',

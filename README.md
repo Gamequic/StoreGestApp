@@ -9,7 +9,7 @@
     * [ ] Orders
     * [ ] Money
         * [X] Dashboard
-        * [ ] Record
+        * [X] Record
         * [ ] Update
 * [X] Colors
 * [ ] Styling
