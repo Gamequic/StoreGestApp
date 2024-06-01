@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { View } from "react-native";
 import { DataTable } from 'react-native-paper'; 
 import { ScrollView, StyleSheet } from "react-native";
-
 import { Calendar } from "react-native-calendars";
+
 import Button from "../../components/Button";
 import FloatingModal from "../../components/FloatingModal";
 
@@ -11,7 +11,7 @@ import ThemeContext from '../../ThemeContext';
 
 import LANG from '../../../lang';
 
-function MoneyRecord () {
+function MoneyRecord ({ navigation }) {
     const [ modalVisible, setModalVisible ] = useState(false);
     // Get current date
     const [ selectedDay, setSelectedDay ] = useState(new Date().toISOString().split('T')[0]);
@@ -19,7 +19,7 @@ function MoneyRecord () {
     const {
         currentLang, setcurrentLang,
         styles
-      } = useContext(ThemeContext);
+    } = useContext(ThemeContext);
 
     return (
         <View style={styles.container}>
@@ -34,7 +34,7 @@ function MoneyRecord () {
                 <ScrollView
                     style={StyleSheet.create({ height: '75%'})}
                 >
-                    <Button type={'pressable'}>
+                    <Button type={'pressable'} onPress={() => {navigation.navigate('MoneyUpdate')}}>
                         <DataTable.Row> 
                             <DataTable.Cell>23-12-12</DataTable.Cell>
                             <DataTable.Cell>1200</DataTable.Cell> 
@@ -43,7 +43,7 @@ function MoneyRecord () {
                         </DataTable.Row>
                     </Button>
                 
-                    <Button type={'pressable'}>
+                    <Button type={'pressable'} onPress={() => {navigation.navigate('MoneyUpdate')}}>
                         <DataTable.Row> 
                             <DataTable.Cell>23-12-12</DataTable.Cell>
                             <DataTable.Cell>1200</DataTable.Cell> 

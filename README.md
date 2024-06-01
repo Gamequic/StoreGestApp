@@ -10,7 +10,8 @@
     * [ ] Money
         * [X] Dashboard
         * [X] Record
-        * [ ] Update
+        * [X] Update
+        * [ ] Create
 * [X] Colors
 * [ ] Styling
 * [ ] Backend

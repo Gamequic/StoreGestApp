@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { Layout } from "react-native-reanimated";
 
 const colors = {
   background: '#fffff0',
@@ -14,6 +15,8 @@ const colors = {
   desert3: 'f4a854',
   desert4: '#f9eab6',
   desert5: '#ffffce',
+
+  margin: 4,
 }
 
 const styles = StyleSheet.create({
@@ -24,10 +27,12 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     containerH: {
-      flex: 1,
       flexDirection: 'row',
       backgroundColor: colors.background,
       justifyContent: 'center'
+    },
+    margin: {
+      margin: colors.margin
     },
     input: {
       height: "1rem",
