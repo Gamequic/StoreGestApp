@@ -31,6 +31,13 @@ const styles = StyleSheet.create({
       backgroundColor: colors.background,
       justifyContent: 'center'
     },
+    card: {
+      backgroundColor: colors.desert4,
+      borderRadius: 8,
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: colors.margin
+    },
     margin: {
       margin: colors.margin
     },
@@ -46,6 +53,12 @@ const styles = StyleSheet.create({
       width: 120,
       height: 120,
       borderRadius: 18,
+    },
+    foodImage: {
+      width: 120,
+      height: 120,
+      borderRadius: 8,
+      margin: colors.margin
     },
     buttonPrimary: {
       alignItems: 'center',

@@ -7,11 +7,15 @@
     * [ ] Dashboard
     * [ ] Products
     * [ ] Orders
-    * [ ] Money
+        * [X] Dashboard
+        * [ ] Record
+        * [ ] Update
+        * [X] Create
+    * [X] Money
         * [X] Dashboard
         * [X] Record
         * [X] Update
-        * [ ] Create
+        * [X] Create
 * [X] Colors
 * [ ] Styling
 * [ ] Backend

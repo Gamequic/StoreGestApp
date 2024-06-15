@@ -5,7 +5,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import DashboardScreen from './../screens/Dashboard';
 import FoodScreen from './../screens/Food';
+
 import OrdersScreen from './../screens/Orders';
+import OrdersRecord from './../screens/Orders/Record';
+import OrdersCreate from './../screens/Orders/Create';
+import OrdersUpdate from './../screens/Orders/Update';
+
 import MoneyScreen from './../screens/Money';
 import MoneyRecord from './../screens/Money/Record';
 import MoneyCreate from '../screens/Money/Create';
@@ -16,6 +21,7 @@ import LANG from './../../lang';
 
 const NavTab = createBottomTabNavigator();
 const MoneyStack = createStackNavigator();
+const OrdersStack = createStackNavigator();
 
 function MoneyStackScreen() {
   return (
@@ -30,6 +36,22 @@ function MoneyStackScreen() {
       <MoneyStack.Screen name='MoneyCreate' component={MoneyCreate} />
       <MoneyStack.Screen name='MoneyUpdate' component={MoneyUpdate} />
     </MoneyStack.Navigator>
+  );
+}
+
+function OrderStackScreen() {
+  return (
+    <OrdersStack.Navigator
+      initialRouteName="Orders"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <OrdersStack.Screen name="Orders" component={OrdersScreen} />
+      {/* <OrdersStack.Screen name="OrdersRecord" component={OrdersRecord} /> */}
+      <OrdersStack.Screen name='OrdersCreate' component={OrdersCreate} />
+      {/* <OrdersStack.Screen name='OrdersUpdate' component={OrdersUpdate} /> */}
+    </OrdersStack.Navigator>
   );
 }
 
@@ -64,8 +86,8 @@ function TabNavigator() {
         }}
       />
       <NavTab.Screen
-        name="Orders"
-        component={OrdersScreen}
+        name="OrdersStack"
+        component={OrderStackScreen}
         options={{
           tabBarLabel: LANG[currentLang].Orders,
           tabBarIcon: ({ color, size }) => (
