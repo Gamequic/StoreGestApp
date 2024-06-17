@@ -19,9 +19,6 @@ function OrdersCreate({ navigation }) {
     const [ modalVisibleAddFood, setModalVisibleAddFood ] = useState(false);
     const [ selectedDay, setSelectedDay ] = useState(new Date().toISOString().split('T')[0]);
 
-    const route = useRoute();
-    const { remove } = route.params;
-
     const {
         currentLang, setcurrentLang
     } = useContext(ThemeContext);

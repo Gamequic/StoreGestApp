@@ -33,7 +33,7 @@ function OrdersRecord ({ navigation }) {
                 <ScrollView
                     style={StyleSheet.create({ height: '75%'})}
                 >
-                    <Button type={'pressable'} onPress={() => {navigation.navigate('MoneyUpdate')}}>
+                    <Button type={'pressable'} onPress={() => {navigation.navigate('OrdersUpdate')}}>
                         <DataTable.Row> 
                             <DataTable.Cell>23-12-12</DataTable.Cell>
                             <DataTable.Cell>1200</DataTable.Cell> 
@@ -41,7 +41,7 @@ function OrdersRecord ({ navigation }) {
                         </DataTable.Row>
                     </Button>
                 
-                    <Button type={'pressable'} onPress={() => {navigation.navigate('MoneyUpdate')}}>
+                    <Button type={'pressable'} onPress={() => {navigation.navigate('OrdersUpdate')}}>
                         <DataTable.Row> 
                             <DataTable.Cell>23-12-12</DataTable.Cell>
                             <DataTable.Cell>1200</DataTable.Cell> 

@@ -16,7 +16,6 @@ function OrderScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title} >{LANG[currentLang].Balance + ": 100$"}</Text>
       <Button
         title={LANG[currentLang].GenerateOrder}
         type={'buttonBigGreen'}

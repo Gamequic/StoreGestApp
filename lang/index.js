@@ -26,6 +26,7 @@ const LANG = {
         "Reason": "Razón",
         "Description": "Descripción",
         "GenerateOrder": "Generar orden",
+        "UpdateOrder": "Actualizar order",
     },
     "US": {
         "Welcome": "Welcome",
@@ -54,6 +55,7 @@ const LANG = {
         "Reason": "Reason",
         "Description": "Description",
         "GenerateOrder": "Generate order",
+        "UpdateOrder": "Update order",
     }
 }
 

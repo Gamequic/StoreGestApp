@@ -6,10 +6,10 @@
 * [ ] Tabs
     * [ ] Dashboard
     * [ ] Products
-    * [ ] Orders
+    * [X] Orders
         * [X] Dashboard
-        * [ ] Record
-        * [ ] Update
+        * [X] Record
+        * [X] Update
         * [X] Create
     * [X] Money
         * [X] Dashboard
