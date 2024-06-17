@@ -50,7 +50,7 @@ function FoodScreen({ navigation }) {
         <View style={styles.margin}>
           <Button
             title={'Agregar comida'}
-            onPress={() => {navigation.navigate('')}}
+            onPress={() => {navigation.navigate('FoodCreate')}}
           />
         </View>
       <StatusBar style="auto" />
