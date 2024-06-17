@@ -88,6 +88,10 @@ function OrdersCreate({ navigation }) {
                     >
                         <TextInput
                             style={styles.input}
+                            placeholder={LANG[currentLang].Price}
+                        />
+                        <TextInput
+                            style={styles.input}
                             placeholder={LANG[currentLang].Amount}
                         />
                         <Button

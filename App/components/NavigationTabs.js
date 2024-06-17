@@ -48,7 +48,7 @@ function OrderStackScreen() {
       }}
     >
       <OrdersStack.Screen name="Orders" component={OrdersScreen} />
-      {/* <OrdersStack.Screen name="OrdersRecord" component={OrdersRecord} /> */}
+      <OrdersStack.Screen name="OrdersRecord" component={OrdersRecord} />
       <OrdersStack.Screen name='OrdersCreate' component={OrdersCreate} />
       {/* <OrdersStack.Screen name='OrdersUpdate' component={OrdersUpdate} /> */}
     </OrdersStack.Navigator>
