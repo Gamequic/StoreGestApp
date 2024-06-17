@@ -5,12 +5,23 @@ import ThemeContext from './../ThemeContext';
 import Button from "./Button";
 import FloatingModal from "./FloatingModal";
 
-function FoodCard () {
+import LANG from "./../../lang";
+
+function FoodCard ({ screen, navigation }) {
     const [ floatingModal, setFloatingModal ] = useState(false); 
 
     const {
+        currentLang, setcurrentLang,
         styles
     } = useContext(ThemeContext);
+
+    const handleButton = () => {
+        if ( screen ) {
+            return () => {navigation.navigate(screen);}
+        } else { 
+            return () => {setFloatingModal(true);}
+        }
+    }
 
     return (
         <View
@@ -23,7 +34,7 @@ function FoodCard () {
         >
             <Button
                 type='pressable'
-                onPress={() => {setFloatingModal(true)}}
+                onPress={handleButton()}
             >
                 <View
                     style={styles.card}>
@@ -44,10 +55,10 @@ function FoodCard () {
                 <Text>Ingrese la cantidad</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder={"Cantidad"}
+                    placeholder={LANG[currentLang].Amount}
                 />
-                <Text>Comprando 2 Hotdogs</Text>
-                <Text>Comprando 2 kilos de queso</Text>
+                <Text>2 Hotdogs</Text>
+                <Text>2 kilos de queso</Text>
             </FloatingModal>
         </View>
     )

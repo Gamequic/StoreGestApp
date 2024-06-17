@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import DashboardScreen from './../screens/Dashboard';
-import FoodScreen from './../screens/Food';
 
 import OrdersScreen from './../screens/Orders';
 import OrdersRecord from './../screens/Orders/Record';
@@ -13,8 +12,10 @@ import OrdersUpdate from './../screens/Orders/Update';
 
 import MoneyScreen from './../screens/Money';
 import MoneyRecord from './../screens/Money/Record';
-import MoneyCreate from '../screens/Money/Create';
-import MoneyUpdate from '../screens/Money/Update';
+import MoneyCreate from './../screens/Money/Create';
+import MoneyUpdate from './../screens/Money/Update';
+
+import FoodScreen from './../screens/Food';
 
 import ThemeContext from './../ThemeContext';
 import LANG from './../../lang';
@@ -22,6 +23,7 @@ import LANG from './../../lang';
 const NavTab = createBottomTabNavigator();
 const MoneyStack = createStackNavigator();
 const OrdersStack = createStackNavigator();
+const FoodStack = createStackNavigator();
 
 function MoneyStackScreen() {
   return (
@@ -55,6 +57,22 @@ function OrderStackScreen() {
   );
 }
 
+function FoodStackScreen () {
+  return (
+    <FoodStack.Navigator
+      initialRouteName="Food"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <FoodStack.Screen name="Food" component={FoodScreen} />
+      {/* <FoodStack.Screen name="OrdersRecord" component={OrdersRecord} /> */}
+      {/* <FoodStack.Screen name='OrdersCreate' component={OrdersCreate} /> */}
+      {/* <FoodStack.Screen name='OrdersUpdate' component={OrdersUpdate} /> */}
+    </FoodStack.Navigator>
+  )
+}
+
 function TabNavigator() {
   const { currentLang } = useContext(ThemeContext);
 
@@ -76,8 +94,8 @@ function TabNavigator() {
         }}
       />
       <NavTab.Screen
-        name="Food"
-        component={FoodScreen}
+        name="FoodStack"
+        component={FoodStackScreen}
         options={{
           tabBarLabel: LANG[currentLang].Meal,
           tabBarIcon: ({ color, size }) => (
