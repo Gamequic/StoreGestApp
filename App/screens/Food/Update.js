@@ -10,7 +10,7 @@ import styles from "../../style";
 
 import LANG from '../../../lang';
 
-function FoodCreate({ navigation }) {
+function FoodUpdate({ navigation }) {
     const [ selectedImage, setSelectedImage ] = useState(require('./../../../assets/defaultFood.png'));
     const [ isKg, setIsKg ] = useState(false);
 
@@ -62,8 +62,9 @@ function FoodCreate({ navigation }) {
                 <View style={styles.margin} />
                 <Button onPress={() => {navigation.goBack()}} title={ LANG[currentLang].AddToMenu } />
             </View>
+            <Button onPress={() => {navigation.goBack()}} title={ LANG[currentLang].Delete } />
         </View>
     )
 }
 
-export default FoodCreate;
+export default FoodUpdate;

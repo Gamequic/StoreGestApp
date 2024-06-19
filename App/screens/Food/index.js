@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, View, StyleSheet } from 'react-native';
 
@@ -27,24 +27,24 @@ function FoodScreen({ navigation }) {
                     justifyContent: 'flex-start',
                 })}
             >
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
-                <FoodCard screen></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
+                <FoodCard screen={'FoodUpdate'}></FoodCard>
             </View>
         </ScrollView>
         <View style={styles.margin}>

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { View, Text, Image, StyleSheet, TextInput } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 import ThemeContext from './../ThemeContext';
 import Button from "./Button";
@@ -7,8 +8,9 @@ import FloatingModal from "./FloatingModal";
 
 import LANG from "./../../lang";
 
-function FoodCard ({ screen, navigation }) {
+function FoodCard ({ screen }) {
     const [ floatingModal, setFloatingModal ] = useState(false); 
+    const navigation = useNavigation();
 
     const {
         currentLang, setcurrentLang,
@@ -52,7 +54,7 @@ function FoodCard ({ screen, navigation }) {
                 visible={floatingModal}
                 onClose={() => {setFloatingModal(false)}}
             >
-                <Text>Ingrese la cantidad</Text>
+                <Text>{LANG[currentLang].Amount}</Text>
                 <TextInput
                     style={styles.input}
                     placeholder={LANG[currentLang].Amount}

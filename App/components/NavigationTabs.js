@@ -17,6 +17,7 @@ import MoneyUpdate from './../screens/Money/Update';
 
 import FoodScreen from './../screens/Food';
 import FoodCreate from './../screens/Food/Create';
+import FoodUpdate from './../screens/Food/Update';
 
 import ThemeContext from './../ThemeContext';
 import LANG from './../../lang';
@@ -67,9 +68,8 @@ function FoodStackScreen () {
       }}
     >
       <FoodStack.Screen name="Food" component={FoodScreen} />
-      {/* <FoodStack.Screen name="OrdersRecord" component={OrdersRecord} /> */}
       <FoodStack.Screen name='FoodCreate' component={FoodCreate} />
-      {/* <FoodStack.Screen name='OrdersUpdate' component={OrdersUpdate} /> */}
+      <FoodStack.Screen name='FoodUpdate' component={FoodUpdate} />
     </FoodStack.Navigator>
   )
 }

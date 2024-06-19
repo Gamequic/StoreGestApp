@@ -5,10 +5,10 @@
 * [X] Navigation tab
 * [ ] Tabs
     * [ ] Dashboard
-    * [ ] Products
+    * [X] Products
         * [X] Dashboard
-        * [ ] Update
-        * [ ] Create
+        * [X] Update
+        * [X] Create
     * [X] Orders
         * [X] Dashboard
         * [X] Record

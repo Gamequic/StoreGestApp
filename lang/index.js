@@ -30,6 +30,7 @@ const LANG = {
         "Description": "Descripción",
         "GenerateOrder": "Generar orden",
         "UpdateOrder": "Actualizar order",
+        "AddToMenu": "Añadir al menú",
     },
     "US": {
         "Welcome": "Welcome",
@@ -62,6 +63,7 @@ const LANG = {
         "Description": "Description",
         "GenerateOrder": "Generate order",
         "UpdateOrder": "Update order",
+        "AddToMenu": "Add to menu",
     }
 }
 
