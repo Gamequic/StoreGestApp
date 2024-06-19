@@ -1,29 +1,37 @@
 # Checklist
 
-* [X] Lenguages
-* [X] Log in
-* [X] Navigation tab
-* [ ] Tabs
+* [X] Lenguages 🔴
+* [X] Log in 🔴
+* [X] Navigation tab 🔴
+* [ ] Tabs 🔴
     * [ ] Dashboard
     * [X] Products
         * [X] Dashboard
         * [X] Update
         * [X] Create
+        * [ ] Statistics 🟢
     * [X] Orders
         * [X] Dashboard
         * [X] Record
         * [X] Update
         * [X] Create
+        * [ ] Statistics 🟢
     * [X] Money
         * [X] Dashboard
         * [X] Record
         * [X] Update
         * [X] Create
-* [X] Colors
-* [ ] Styling
-* [ ] Backend
+        * [ ] Statistics 🟢
+* [X] Colors 🔴
+* [ ] Backend 🔴
     * [ ] Log in
-    * [ ] Home
+    * [ ] Dashboard
     * [ ] CRUD products
     * [ ] CRUD Orders
     * [ ] CRUD Money
+
+## Flags
+- 🔴 Urgent
+- 🟢 Later
+
+It flows like the file system, if backend is 🔴 Urgent, all the child task are 🔴 Urgent, unless it is set as 🟢 Later.
