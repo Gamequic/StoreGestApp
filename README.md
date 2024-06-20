@@ -1,3 +1,7 @@
+- Permissions
+- Clints tab
+- Products
+
 # Checklist
 
 * [X] Lenguages 🔴
