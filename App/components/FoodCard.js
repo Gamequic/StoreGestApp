@@ -8,7 +8,7 @@ import FloatingModal from "./FloatingModal";
 
 import LANG from "./../../lang";
 
-function FoodCard ({ screen }) {
+function FoodCard ({ screen, style }) {
     const [ floatingModal, setFloatingModal ] = useState(false); 
     const navigation = useNavigation();
 
@@ -27,12 +27,12 @@ function FoodCard ({ screen }) {
 
     return (
         <View
-            style={StyleSheet.create({
+            style={[StyleSheet.create({
                 width: '50%',
                 padding: 10,
                 justifyContent: 'center',
                 alignItems: 'center',
-            })}
+            }), style]}
         >
             <Button
                 type='pressable'

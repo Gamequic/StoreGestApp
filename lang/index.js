@@ -31,6 +31,9 @@ const LANG = {
         "GenerateOrder": "Generar orden",
         "UpdateOrder": "Actualizar order",
         "AddToMenu": "Añadir al menú",
+        "TheMostSold": "Lo más vendido",
+        "OrdersAttended": "Pedidos atendidos",
+        "Average": "Promedio"
     },
     "US": {
         "Welcome": "Welcome",
@@ -64,6 +67,9 @@ const LANG = {
         "GenerateOrder": "Generate order",
         "UpdateOrder": "Update order",
         "AddToMenu": "Add to menu",
+        "TheMostSold": "The most sold",
+        "OrdersAttended": "Orders attended",
+        "Average": "Average"
     }
 }
 

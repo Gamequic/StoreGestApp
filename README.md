@@ -4,7 +4,7 @@
 * [X] Log in 🔴
 * [X] Navigation tab 🔴
 * [ ] Tabs 🔴
-    * [ ] Dashboard
+    * [X] Dashboard
     * [X] Products
         * [X] Dashboard
         * [X] Update

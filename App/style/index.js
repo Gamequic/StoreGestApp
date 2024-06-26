@@ -31,12 +31,50 @@ const styles = StyleSheet.create({
       backgroundColor: colors.background,
       justifyContent: 'center'
     },
-    card: {
-      backgroundColor: colors.desert4,
-      borderRadius: 8,
+    containerL: {
+      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      margin: colors.margin
+    },
+    containerHL: {
+      flexDirection: 'row',
+      justifyContent: 'center'
+    },
+    card: {
+      backgroundColor: colors.desert5,
+      borderRadius: 12,
+      padding: 4,
+      margin: colors.margin,
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: colors.margin,
+      shadowColor: "purple",
+      shadowOffset: {
+        width: 6,
+        height: 6,
+      },
+      shadowOpacity: 0.5,
+      shadowRadius: 4,
+      elevation: 16, // Android
+    },
+    cardF: {
+      backgroundColor: colors.desert5,
+      borderRadius: 12,
+      padding: 4,
+      margin: colors.margin,
+      alignItems: 'center',
+      justifyContent: 'center',
+      margin: colors.margin,
+      shadowColor: "purple",
+      shadowOffset: {
+        width: 6,
+        height: 6,
+      },
+      shadowOpacity: 0.5,
+      shadowRadius: 4,
+      elevation: 16, // Android
+      flex: 1,
+      marginVertical: 4,
     },
     margin: {
       margin: colors.margin
@@ -57,7 +95,7 @@ const styles = StyleSheet.create({
     foodImage: {
       width: 120,
       height: 120,
-      borderRadius: 8,
+      borderRadius: 12,
       margin: colors.margin
     },
     buttonPrimary: {
@@ -100,6 +138,9 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       letterSpacing: 0.25,
       color: 'white',
+    },
+    title2: {
+      fontSize: 24
     },
     title: {
       fontSize: 32
