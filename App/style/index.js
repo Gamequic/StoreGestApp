@@ -40,6 +40,11 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'center'
     },
+    switchContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     card: {
       backgroundColor: colors.desert5,
       borderRadius: 12,
