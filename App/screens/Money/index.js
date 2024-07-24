@@ -1,22 +1,38 @@
-import { useContext } from 'react';
+import { useState, useContext, useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import Button from '../../components/Button'
+import MoneyService from '../../services/money.service';
 
 import ThemeContext from '../../ThemeContext';
 
 import LANG from '../../../lang';
 
+const service = new MoneyService()
+
 function MoneyScreen({ navigation }) {
+  const [ amount, setAmount ] = useState("0")
+
   const {
     currentLang, setcurrentLang,
     styles
   } = useContext(ThemeContext);
 
+  const UpdateLastOne = async () => {
+    const LastOne = await service.FindLastOne()
+    setAmount(LastOne.Current)
+  }
+  useFocusEffect(
+    useCallback(() => {
+      UpdateLastOne();
+    }, [])
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title} >{LANG[currentLang].Balance + ": 100$"}</Text>
+      <Text style={styles.title} >{LANG[currentLang].Balance + ": " + amount + "$"}</Text>
       <Button
         title={LANG[currentLang].DepositMoney}
         type={'buttonBigGreen'}

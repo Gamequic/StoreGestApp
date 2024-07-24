@@ -32,7 +32,7 @@
     * [ ] Dashboard
     * [ ] CRUD products
     * [ ] CRUD Orders
-    * [ ] CRUD Money
+    * [X] CRUD Money
 
 ## Flags
 - 🔴 Urgent

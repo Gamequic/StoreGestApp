@@ -28,6 +28,7 @@ function LogIn({ setLogin }) {
     setMessage("")
     try {
       await Service.LogIn({email, password});
+      setLogin(true)
     } catch (error) {
       if (error.message === "Request failed with status code 404") {
         setMessage(LANG[currentLang]["404"])
