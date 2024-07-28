@@ -8,7 +8,7 @@ import FloatingModal from "./FloatingModal";
 
 import LANG from "./../../lang";
 
-function FoodCard ({ screen, style }) {
+function FoodCard ({ ID, screen, style, name, price, isKg }) {
     const [ floatingModal, setFloatingModal ] = useState(false); 
     const navigation = useNavigation();
 
@@ -19,7 +19,8 @@ function FoodCard ({ screen, style }) {
 
     const handleButton = () => {
         if ( screen ) {
-            return () => {navigation.navigate(screen);}
+            return () => {navigation.navigate(screen, { ID });
+        }
         } else { 
             return () => {setFloatingModal(true);}
         }
@@ -43,10 +44,11 @@ function FoodCard ({ screen, style }) {
                     <Image
                         style={styles.foodImage}
                         source={{
-                        uri: 'https://img.freepik.com/foto-gratis/deliciosos-hot-dogs-mostaza-cebolla_23-2148768194.jpg?w=1380&t=st=1718421376~exp=1718421976~hmac=5adfc8f6d06910ccab6ad8ec4dd12ddf2274c1bc3154a517cc83e0ef87d34732',
+                        uri: 'https://w7.pngwing.com/pngs/2/583/png-transparent-hamburger-fast-food-cheeseburger-vegetarian-cuisine-vactor-food-cheese-cheeseburger.png',
                         }}
                     />
-                    <Text>Hot dog</Text>
+                    <Text>{name}</Text>
+                    <Text>{price}{isKg ? "/kg" : " unit"}</Text>
                 </View>
             </Button>
 

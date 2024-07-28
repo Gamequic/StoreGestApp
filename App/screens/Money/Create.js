@@ -77,7 +77,7 @@ function MoneyCreate({ navigation }) {
         return (text) => {
             setValue(text);
         };
-      };
+    };
 
     return (
         <View style={styles.container}>

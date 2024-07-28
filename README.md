@@ -30,7 +30,7 @@
 * [ ] Backend 🔴
     * [X] Log in
     * [ ] Dashboard
-    * [ ] CRUD products
+    * [X] CRUD products
     * [ ] CRUD Orders
     * [X] CRUD Money
 

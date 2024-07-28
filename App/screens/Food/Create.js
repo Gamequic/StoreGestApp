@@ -5,14 +5,21 @@ import * as ImagePicker from 'expo-image-picker';
 
 import Button from "../../components/Button";
 
+import FoodService from "../../services/food.service";
+
 import ThemeContext from '../../ThemeContext';
 import styles from "../../style";
 
 import LANG from '../../../lang';
 
+const service = new FoodService();
+
 function FoodCreate({ navigation }) {
     const [ selectedImage, setSelectedImage ] = useState(require('./../../../assets/defaultFood.png'));
+    const [ name, setName ] = useState("");
+    const [ amount, setAmount ] = useState("");
     const [ isKg, setIsKg ] = useState(false);
+    const [ warning, setWarning ] = useState("");
 
     const {
         currentLang, setcurrentLang
@@ -31,20 +38,47 @@ function FoodCreate({ navigation }) {
         }
     };
 
+    const HandleCreateFood = async () => {
+        setWarning("");
+        try {
+          const rta = await service.Create({
+            "Amount": Number(amount),
+            "IsKg": isKg,
+            "Name": name
+          });
+          navigation.goBack();
+        } catch (error) {
+          setWarning(error.response.data);
+        }
+    };
+
+    const handleInput = (setValue) => {
+        return (text) => {
+            setValue(text);
+        };
+    };
+
     return (
         <View style={styles.container}>
-            <Image
+            {/* <Image
                 source={selectedImage}
                 style={styles.image}
             />
-            <Button onPress={() => {pickImageAsync()}} title={LANG[currentLang].Image} />
+            <Button onPress={() => {pickImageAsync()}} title={LANG[currentLang].Image} /> */}
             <Text>{LANG[currentLang].Name}</Text>
-            <TextInput style={styles.input} placeholder={LANG[currentLang].Name} />
+            <TextInput
+                style={styles.input}
+                placeholder={LANG[currentLang].Name}
+                value={name}
+                onChangeText={handleInput(setName)}    
+            />
             <Text>{isKg ? LANG[currentLang].PriceKG : LANG[currentLang].PriceUnit}</Text>
             <TextInput
                 style={styles.input}
                 placeholder={isKg ? LANG[currentLang].PriceKG : LANG[currentLang].PriceUnit}
                 keyboardType="numeric"
+                value={amount}
+                onChangeText={handleInput(setAmount)}
             />
 
             <View style={[ styles.containerH, styles.margin ]}>
@@ -57,10 +91,12 @@ function FoodCreate({ navigation }) {
                 <Text>Kg</Text>
             </View>
 
+            <Text>{warning}</Text>
+
             <View style={[ styles.containerH, styles.margin ]}>
                 <Button onPress={() => {navigation.goBack()}} title={LANG[currentLang].Cancel} />
                 <View style={styles.margin} />
-                <Button onPress={() => {navigation.goBack()}} title={ LANG[currentLang].AddToMenu } />
+                <Button onPress={HandleCreateFood} title={ LANG[currentLang].AddToMenu } />
             </View>
         </View>
     )
