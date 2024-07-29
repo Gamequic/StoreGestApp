@@ -1,8 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { View, Text } from "react-native";
 import { DataTable } from 'react-native-paper'; 
 import { ScrollView, StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
+import { useFocusEffect } from '@react-navigation/native';
 
 import MoneyService from "./../../services/money.service";
 
@@ -54,13 +55,11 @@ function MoneyRecord ({ navigation }) {
         setMoneyRecordUx(MoneyRecordTmp);
     };
 
-    // Reload the record every 60 seconds
-    useEffect(() => {
-        HandleRecord();
-        const interval = setInterval(HandleRecord, 60000);
-
-        return () => clearInterval(interval);
-    }, []);
+    useFocusEffect(
+        useCallback(() => {
+            HandleRecord();
+        }, [])
+    );
 
     // Reload list when selectedDay change
     useEffect(() => {

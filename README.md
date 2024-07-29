@@ -39,3 +39,7 @@
 - 🟢 Later
 
 It flows like the file system, if backend is 🔴 Urgent, all the child task are 🔴 Urgent, unless it is set as 🟢 Later.
+
+# We use SemVer to versioning
+
+https://semver.org/spec/v2.0.0.html
