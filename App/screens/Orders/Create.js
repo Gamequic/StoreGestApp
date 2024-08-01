@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useCallback } from "react";
 import { Text, View, TextInput, ScrollView, StyleSheet } from "react-native";
 import { DataTable } from 'react-native-paper'; 
 import { Calendar } from "react-native-calendars";
 import { useRoute } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import Button from "../../components/Button";
 import FloatingModal from "../../components/FloatingModal";
@@ -10,22 +11,85 @@ import FoodCard from "../../components/FoodCard";
 
 import ThemeContext from '../../ThemeContext';
 import styles from "../../style";
+import FoodService from './../../services/food.service';
+import OrderService from './../../services/orders.service';
 
 import LANG from '../../../lang';
 
+const foodService = new FoodService();
+const service = new OrderService();
+
+// Mostrar la lista de cosas y actualizarla
+
 function OrdersCreate({ navigation }) {
-    const [ modalVisibleCalendar, setModalVisibleCalendar ] = useState(false);
+    // const [ modalVisibleCalendar, setModalVisibleCalendar ] = useState(false);
     const [ modalVisibleFood, setModalVisibleFood ] = useState(false);
     const [ modalVisibleAddFood, setModalVisibleAddFood ] = useState(false);
-    const [ selectedDay, setSelectedDay ] = useState(new Date().toISOString().split('T')[0]);
+    // const [ selectedDay, setSelectedDay ] = useState(new Date().toISOString().split('T')[0]);
+    const [ ordersUx, setOrdersUx ] = useState();
+    const [ foodListUX, setFoodListUX ] = useState();
+    const [ foodListId, setFoodListId ] = useState([]);
+    const [ total, setTotal ] = useState(0);
 
     const {
         currentLang, setcurrentLang
     } = useContext(ThemeContext);
 
+    // Hacer que cuando la presiones se pueda agregar a la lista (todavia no existe esa lista)
+    const UpdateFind = async () => {
+        const FoodList = await foodService.Find()
+        let tempFoodListUx = []
+        FoodList.forEach((food, index) => {
+          tempFoodListUx.push(
+            <FoodCard 
+                key={food.ID}
+                name={food.Name}
+                price={food.Amount}
+                isKg={food.IsKg}
+                ID={food.ID} 
+                list={foodListId}
+                setList={setFoodListId}
+                callback={handleFoodListId}
+            />
+          )
+        })
+        setFoodListUX(tempFoodListUx)
+      }
+
+    useFocusEffect(
+        useCallback(() => {
+            UpdateFind();
+        }, [])
+    );
+
+    const handleFoodListId = () => {
+        let tempOrdersUx = [];
+        let tempTotal = 0;
+        foodListId.forEach((food, index) => {
+            tempOrdersUx.push(
+                // <Button type={'pressable'} onPress={() => {setModalVisibleFood(true)}}>
+                <Button type={'pressable'} key={food.ID}>
+                    <DataTable.Row> 
+                        <DataTable.Cell>{food.Name}</DataTable.Cell>
+                        <DataTable.Cell>{food.Amount}{food.IsKg ? "kg" : " unit"}</DataTable.Cell> 
+                        <DataTable.Cell>{food.Price}</DataTable.Cell>
+                    </DataTable.Row>
+                </Button>
+            )
+            tempTotal = Number(tempTotal) + Number(food.Price)
+        })
+        setOrdersUx(tempOrdersUx);
+        setTotal(tempTotal);
+    }
+
+    const handleCreate = () => {
+        service.Create({ Amount: Number(total), foodListId });
+        navigation.goBack();
+    }
+
     return (
         <View style={styles.container}>
-            <Text>{LANG[currentLang].Date}</Text>
+            {/* <Text>{LANG[currentLang].Date}</Text>
             <Button
                 title={selectedDay}
                 onPress={() => setModalVisibleCalendar(true)}
@@ -43,7 +107,7 @@ function OrdersCreate({ navigation }) {
                         [selectedDay]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}
                     }}
                 />
-            </FloatingModal>
+            </FloatingModal> */}
             
             <DataTable> 
                 <DataTable.Header>
@@ -55,30 +119,7 @@ function OrdersCreate({ navigation }) {
                 <ScrollView
                     style={StyleSheet.create({ height: '45%'})}
                 >
-                    <Button type={'pressable'} onPress={() => {setModalVisibleFood(true)}}>
-                        <DataTable.Row> 
-                            <DataTable.Cell>Hot dog</DataTable.Cell>
-                            <DataTable.Cell>2</DataTable.Cell> 
-                            <DataTable.Cell>80</DataTable.Cell>
-                        </DataTable.Row>
-                    </Button>
-                
-                    <Button type={'pressable'} onPress={() => { setModalVisibleFood(true) }}>
-                        <DataTable.Row> 
-                            <DataTable.Cell>Queso oaxaca</DataTable.Cell>
-                            <DataTable.Cell>0.5 kg</DataTable.Cell> 
-                            <DataTable.Cell>120</DataTable.Cell>
-                        </DataTable.Row>
-                    </Button>
-
-                    <Button type={'pressable'} onPress={() => {setModalVisibleFood(true)}}>
-                        <DataTable.Row> 
-                            <DataTable.Cell>Hot dog</DataTable.Cell>
-                            <DataTable.Cell>2</DataTable.Cell> 
-                            <DataTable.Cell>80</DataTable.Cell>
-                        </DataTable.Row>
-                    </Button>
-
+                    {ordersUx}
                     <FloatingModal
                         visible={ modalVisibleFood }
                         onClose={() => setModalVisibleFood(false)}
@@ -119,34 +160,17 @@ function OrdersCreate({ navigation }) {
                             justifyContent: 'flex-start',
                         })}
                     >
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
-                            <FoodCard></FoodCard>
+                        {foodListUX}
                     </View>
                 </ScrollView>
             </FloatingModal>
 
-            <Text style={StyleSheet.create({ fontSize: 32, margin: 24 })}>{LANG[currentLang].Price + ": 280$"}</Text>
+            <Text style={StyleSheet.create({ fontSize: 32, margin: 24 })}>{LANG[currentLang].Price + ": " + total + "$"}</Text>
 
             <View style={styles.containerH}>
                 <Button onPress={() => {navigation.goBack()}} title={LANG[currentLang].Cancel} />
                 <View style={styles.margin} />
-                <Button onPress={() => {navigation.goBack()}} title={ LANG[currentLang].GenerateOrder} />
+                <Button onPress={handleCreate} title={ LANG[currentLang].GenerateOrder} />
             </View>
         </View>
     )

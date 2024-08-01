@@ -39,68 +39,31 @@ class FoodService {
     return rta.data
   }
 
-//   async FindOne(id) {
-//     const rta = await axios.get(this.apiURl + '/food/' + id, {
-//       headers: {
-//         'Authorization': 'Bearer your_token',
-//         'Content-Type': 'application/json',
-//         'auth': await service.GetToken()
-//       }
-//     })
+  async Create({ Amount, foodListId }) {
+    try {
+      let FoodList = []
+      let FoodAmount = []
 
-//     return rta.data
-//   }
+      foodListId.forEach((food, index) => {
+        FoodList.push(food.ID)
+        FoodAmount.push(Number(food.Amount))
+      })
 
-//   async Update({ ID, Amount, Name, IsKg }) {
-//     try {
-//       const rta = await axios.patch(this.apiURl + '/food/', {
-//         ID, Name, Amount, IsKg
-//       }, {
-//         headers: {
-//           'Authorization': 'Bearer your_token',
-//           'Content-Type': 'application/json',
-//           'auth': await service.GetToken()
-//         }
-//       });
-//       return rta;
-//     } catch (error) {
-//       throw error;
-//     }
-//   }
+      const rta = await axios.post(this.apiURl + '/orders/', {
+        Amount, FoodList, FoodAmount
+      }, {
+        headers: {
+          'Authorization': 'Bearer your_token',
+          'Content-Type': 'application/json',
+          'auth': await service.GetToken()
+        }
+      });
+      return rta;
 
-//   async Delete(ID) {
-//     try {
-//       const rta = await axios.delete(this.apiURl + '/food/' + ID, {
-//         headers: {
-//           'Authorization': 'Bearer your_token',
-//           'Content-Type': 'application/json',
-//           'auth': await service.GetToken()
-//         }
-//       });
-//       return rta;
-//     } catch (error) {
-//       throw error;
-//     }
-//   }
-
-//   async Create({ Amount, Name, IsKg }) {
-//     try {
-//       const rta = await axios.post(this.apiURl + '/food/', {
-//         "Amount": Number(Amount),
-//         "IsKg": IsKg,
-//         "Name": Name
-//       }, {
-//         headers: {
-//           'Authorization': 'Bearer your_token',
-//           'Content-Type': 'application/json',
-//           'auth': await service.GetToken()
-//         }
-//       });
-//       return rta;
-//     } catch (error) {
-//       throw error;
-//     }
-//   }
+    } catch (error) {
+      throw error;
+    }
+  }
   
 }
 

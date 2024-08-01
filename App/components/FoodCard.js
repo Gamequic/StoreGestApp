@@ -8,8 +8,9 @@ import FloatingModal from "./FloatingModal";
 
 import LANG from "./../../lang";
 
-function FoodCard ({ ID, screen, style, name, price, isKg }) {
+function FoodCard ({ ID, screen, style, name, price, isKg, list, setList, callback }) {
     const [ floatingModal, setFloatingModal ] = useState(false); 
+    const [ amount, setAmount ] = useState(0);
     const navigation = useNavigation();
 
     const {
@@ -25,6 +26,38 @@ function FoodCard ({ ID, screen, style, name, price, isKg }) {
             return () => {setFloatingModal(true);}
         }
     }
+
+    const handleAddToList = () => {
+        const tempList = list;
+        let isOnList = false;
+
+        // Check if is not in the list
+        tempList.forEach((food, index) => {
+            if (food.ID === ID) {
+                isOnList = true;
+                tempList[index].Amount = Number(tempList[index].Amount) + Number(amount);
+                tempList[index].Price = Number(tempList[index].Price) + Number(amount)*Number(price);
+            }
+        })
+        if (!isOnList) { 
+            tempList.push({
+                "Name": name,
+                "Amount": amount,
+                "Price": Number(amount)*Number(price),
+                "IsKg": isKg,
+                "ID": ID
+            });
+        }
+        setList(tempList);
+        callback();
+        setFloatingModal(false);
+    }
+
+    const handleInput = (setValue) => {
+        return (text) => {
+            setValue(text);
+        };
+    };
 
     return (
         <View
@@ -60,9 +93,16 @@ function FoodCard ({ ID, screen, style, name, price, isKg }) {
                 <TextInput
                     style={styles.input}
                     placeholder={LANG[currentLang].Amount}
+                    keyboardType="numeric"
+                    onChangeText={handleInput(setAmount)}
+                    value={amount}
                 />
-                <Text>2 Hotdogs</Text>
-                <Text>2 kilos de queso</Text>
+                <Text>{amount}{isKg ? "kg " : " "}{name}</Text>
+                <Button
+                    title={LANG[currentLang].AddMeal}
+                    onPress={handleAddToList}
+                />
+                <View style={styles.margin} />
             </FloatingModal>
         </View>
     )
