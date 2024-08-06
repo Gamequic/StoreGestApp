@@ -13,10 +13,12 @@ import ThemeContext from '../../ThemeContext';
 import styles from "../../style";
 import FoodService from './../../services/food.service';
 import OrderService from './../../services/orders.service';
+import PhotoService from './../../services/photos.service';
 
 import LANG from '../../../lang';
 
 const foodService = new FoodService();
+const photoService = new PhotoService();
 const service = new OrderService();
 
 // Mostrar la lista de cosas y actualizarla
@@ -48,6 +50,7 @@ function OrdersCreate({ navigation }) {
                 isKg={food.IsKg}
                 ID={food.ID} 
                 list={foodListId}
+                photo={photoService.FindOne(food.Photo)}
                 setList={setFoodListId}
                 callback={handleFoodListId}
             />

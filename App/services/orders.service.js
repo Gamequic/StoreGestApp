@@ -15,7 +15,7 @@ class FoodService {
             'Authorization': 'Bearer your_token',
             'Content-Type': 'application/json',
             'auth': await service.GetToken()
-        }
+          }
         })
     
         return rta.data

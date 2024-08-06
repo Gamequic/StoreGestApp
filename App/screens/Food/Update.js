@@ -8,6 +8,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import Button from "../../components/Button";
 
 import FoodService from "../../services/food.service";
+import PhotoService from './../../services/photos.service';
 
 import ThemeContext from '../../ThemeContext';
 import styles from "../../style";
@@ -15,9 +16,12 @@ import styles from "../../style";
 import LANG from '../../../lang';
 
 const service = new FoodService();
+const photoService = new PhotoService();
 
 function FoodUpdate({ navigation }) {
-    const [ selectedImage, setSelectedImage ] = useState(require('./../../../assets/defaultFood.png'));
+    const [ selectedImage, setSelectedImage ] = useState();
+    const [ anotherImage, setAnotherImage ] = useState(false);
+    const [ photoName, setPhotoName ] = useState("");
     const [ name, setName ] = useState();
     const [ amount, setAmount ] = useState();
     const [ isKg, setIsKg ] = useState(false);
@@ -38,6 +42,7 @@ function FoodUpdate({ navigation }) {
     
         if (!result.canceled) {
             setSelectedImage({ uri: result.assets[0].uri })
+            setAnotherImage(true)
         } else {
           alert('You did not select any image.');
         }
@@ -47,24 +52,25 @@ function FoodUpdate({ navigation }) {
         const food = await service.FindOne(ID);
         setName(food.Name)
         setAmount(String(food.Amount))
-        setIsKg(food.IsKg)      // POner los datos en los entry, falta hacer el update
+        setIsKg(food.IsKg)
+        setSelectedImage(food.Photo)
+        setPhotoName(food.Photo)
     }
 
     const HandleUpdate = async () => {
         setWarning();
         try {
-            console.log({
-                ID,
-                Amount: Number(amount),
-                Name: name,
-                IsKg: Boolean(isKg)
-            })
             const rta = await service.Update({
                 ID,
                 Amount: Number(amount),
                 Name: name,
-                IsKg: Boolean(isKg)
+                IsKg: Boolean(isKg),
+                Photo: photoName
             })
+            console.log(anotherImage)
+            if (anotherImage) {
+                photoService.Update(selectedImage, photoName)
+            }
             navigation.goBack()
         } catch (error) {
             setWarning(error.response.data)
@@ -95,11 +101,11 @@ function FoodUpdate({ navigation }) {
 
     return (
         <View style={styles.container}>
-            {/* <Image
-                source={selectedImage}
+            <Image
+                source={ anotherImage ? selectedImage : {uri: photoService.FindOne(selectedImage)}}
                 style={styles.image}
             />
-            <Button onPress={() => {pickImageAsync()}} title={LANG[currentLang].Image} /> */}
+            <Button onPress={() => {pickImageAsync()}} title={LANG[currentLang].Image} />
             <Text>{LANG[currentLang].Name}</Text>
             <TextInput
                 style={styles.input}

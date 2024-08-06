@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Button from "../../components/Button";
 
 import FoodService from "../../services/food.service";
+import PhotoService from "./../../services/photos.service";
 
 import ThemeContext from '../../ThemeContext';
 import styles from "../../style";
@@ -13,6 +14,7 @@ import styles from "../../style";
 import LANG from '../../../lang';
 
 const service = new FoodService();
+const photoService = new PhotoService();
 
 function FoodCreate({ navigation }) {
     const [ selectedImage, setSelectedImage ] = useState(require('./../../../assets/defaultFood.png'));
@@ -34,21 +36,27 @@ function FoodCreate({ navigation }) {
         if (!result.canceled) {
             setSelectedImage({ uri: result.assets[0].uri })
         } else {
-          alert('You did not select any image.');
+            alert(LANG[currentLang].ImageNotSelected);
         }
     };
 
     const HandleCreateFood = async () => {
         setWarning("");
         try {
-          const rta = await service.Create({
-            "Amount": Number(amount),
-            "IsKg": isKg,
-            "Name": name
-          });
-          navigation.goBack();
+            const url = await photoService.Create(selectedImage);
+            const rta = await service.Create({
+                "Amount": Number(amount),
+                "IsKg": isKg,
+                "Name": name,
+                "Photo": url
+            });
+            navigation.goBack();
         } catch (error) {
-          setWarning(error.response.data);
+            if (error.response === undefined){
+                setWarning(error.message);
+            } else {
+                setWarning(error.response.data);
+            }
         }
     };
 
@@ -60,11 +68,11 @@ function FoodCreate({ navigation }) {
 
     return (
         <View style={styles.container}>
-            {/* <Image
+            <Image
                 source={selectedImage}
                 style={styles.image}
             />
-            <Button onPress={() => {pickImageAsync()}} title={LANG[currentLang].Image} /> */}
+            <Button onPress={() => {pickImageAsync()}} title={LANG[currentLang].Image} />
             <Text>{LANG[currentLang].Name}</Text>
             <TextInput
                 style={styles.input}

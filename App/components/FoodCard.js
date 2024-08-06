@@ -8,7 +8,7 @@ import FloatingModal from "./FloatingModal";
 
 import LANG from "./../../lang";
 
-function FoodCard ({ ID, screen, style, name, price, isKg, list, setList, callback }) {
+function FoodCard ({ ID, screen, style, photo, name, price, isKg, list, setList, callback }) {
     const [ floatingModal, setFloatingModal ] = useState(false); 
     const [ amount, setAmount ] = useState(0);
     const navigation = useNavigation();
@@ -77,7 +77,7 @@ function FoodCard ({ ID, screen, style, name, price, isKg, list, setList, callba
                     <Image
                         style={styles.foodImage}
                         source={{
-                        uri: 'https://w7.pngwing.com/pngs/2/583/png-transparent-hamburger-fast-food-cheeseburger-vegetarian-cuisine-vactor-food-cheese-cheeseburger.png',
+                            uri: photo ? photo : 'https://w7.pngwing.com/pngs/2/583/png-transparent-hamburger-fast-food-cheeseburger-vegetarian-cuisine-vactor-food-cheese-cheeseburger.png'                           ,
                         }}
                     />
                     <Text>{name}</Text>

@@ -2,15 +2,18 @@ import React, { useContext, useState, useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, View, StyleSheet } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import * as base64 from 'base64-js';
 
 import ThemeContext from './../../ThemeContext';
 
 import FoodCard from './../../components/FoodCard';
 import Button from './../../components/Button';
 
-import FoodService from '../../services/food.service';
+import FoodService from './../../services/food.service';
+import PhotoService from './../../services/photos.service';
 
-const service = new FoodService()
+const service = new FoodService();
+const photoService = new PhotoService();
 
 function FoodScreen({ navigation }) {
   const [ foodListUx, setFoodListUx ] = useState();
@@ -25,7 +28,7 @@ function FoodScreen({ navigation }) {
     let tempFoodListUx = []
     FoodList.forEach((food, index) => {
       tempFoodListUx.push(
-        <FoodCard key={food.ID} screen={'FoodUpdate'} name={food.Name} price={food.Amount} isKg={food.IsKg} ID={food.ID} />
+        <FoodCard key={food.ID} screen={'FoodUpdate'} name={food.Name} price={food.Amount} isKg={food.IsKg} ID={food.ID} photo={photoService.FindOne(food.Photo)} />
       )
     })
     setFoodListUx(tempFoodListUx)

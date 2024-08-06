@@ -33,10 +33,10 @@ class FoodService {
     return rta.data
   }
 
-  async Update({ ID, Amount, Name, IsKg }) {
+  async Update({ ID, Amount, Name, IsKg, Photo }) {
     try {
       const rta = await axios.patch(this.apiURl + '/food/', {
-        ID, Name, Amount, IsKg
+        ID, Name, Amount, IsKg, Photo
       }, {
         headers: {
           'Authorization': 'Bearer your_token',
@@ -65,12 +65,13 @@ class FoodService {
     }
   }
 
-  async Create({ Amount, Name, IsKg }) {
+  async Create({ Photo, Amount, Name, IsKg }) {
     try {
       const rta = await axios.post(this.apiURl + '/food/', {
         "Amount": Number(Amount),
         "IsKg": IsKg,
-        "Name": Name
+        "Name": Name,
+        "Photo": Photo
       }, {
         headers: {
           'Authorization': 'Bearer your_token',
