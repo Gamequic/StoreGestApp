@@ -1,19 +1,27 @@
-import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useContext, useCallback, useState } from 'react';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { CartesianChart, Line } from "victory-native";
 
 import ThemeContext from '../ThemeContext';
 import inter from "./../../assets/Inter-Medium.ttf";
 import FoodDeck from './../components/FoodDeck';
-import FoodCard from './../components/FoodDeck';
+
+import MoneyService from './../services/money.service';
 
 import styles from './../style';
 import LANG from './../../lang';
+
+const moneyService = new MoneyService();
 
 function DashboardScreen() {
   const {
     currentLang, setcurrentLang
   } = useContext(ThemeContext);
+
+  const [ DATA, setDATA ] = useState([]);
+  const [ loading, setLoading ] = useState(true);
+  const [ current, setCurrent ] = useState(0);
 
   const dashStyles = {
     container: {
@@ -28,15 +36,82 @@ function DashboardScreen() {
     },
   }
 
-  const DATA = Array.from({ length: 31 }, (_, i) => ({
-    day: i,
-    highTmp: 40 + 30 * Math.random(),
-  }));
+  const getDates = (date, days) => {
+    return Array.from({ length: days }, (_, i) => {
+      let pastDate = new Date(date.getTime() - i * 86400000);
+      return pastDate.toISOString().split('T')[0];
+    });
+  };
+
+  const updateDashboard = async () => {
+    try {
+      setLoading(true);
+  
+      // Get a list of dates
+      const currentDate = new Date();
+      let datesList = getDates(currentDate, 10);
+  
+      // Get the data from the server
+      const data = await moneyService.GetRecordByDateRange(datesList[datesList.length - 1], datesList[0]);
+  
+      // Process the data to show on the graph
+      let daysWithOrders = data.map((record, index) => ({
+        index: index,
+        date: formatDate(record.CreatedAt),
+        record: record
+      }));
+  
+      // Check which dates have orders
+      const tempDATA = [];
+      let index = 0;
+      for (let i = datesList.length - 1; i >= 0; i--) {
+        const date = datesList[i];
+        const foundOrder = daysWithOrders.find(order => order.date === date);
+        if (foundOrder) {
+            tempDATA.push({
+                day: index,
+                highTmp: foundOrder.record.Amount
+            });
+        } else {
+            tempDATA.push({
+                day: index,
+                highTmp: 0,
+            });
+        }
+        index++;
+    }
+      setDATA(tempDATA);
+  
+    } catch (error) {
+      console.error("Error updating dashboard:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // Helper function to format the date
+  const formatDate = isoString => isoString.split('T')[0];
+
+  const updateCurrent = async () => {
+    const LastOne = await moneyService.FindLastOne()
+    setCurrent(LastOne.Current)
+  }
+  
+  useFocusEffect(
+    useCallback(() => {
+      updateDashboard();
+      updateCurrent();
+    }, [])
+  );
+
+  if (loading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
 
   return (
     <View style={ dashStyles.container }>
       <View style={ styles.cardF } >
-        <Text style={styles.title}>{LANG[currentLang].Amount + ": 800$"}</Text>
+        <Text style={styles.title}>{LANG[currentLang].Amount + ": " + current + "$"}</Text>
         <View style={dashStyles.verticalContainer}>
           <CartesianChart
             data={DATA}

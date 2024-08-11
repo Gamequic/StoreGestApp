@@ -39,6 +39,28 @@ class MoneyService {
     return rta.data
   }
 
+  async GetRecordByDateRange(initDate, endDate) {
+    const [ InitYear, InitMonth, InitDay ] = initDate.split("-");
+    const [ EndYear, EndMonth, EndDay ] = endDate.split("-");
+
+    const rta = await axios.post(this.apiURl + '/money/findByDateRange', {
+      "InitYear": Number(InitYear),
+      "InitMonth": Number(InitMonth),
+      "InitDay": Number(InitDay),
+      "EndYear": Number(EndYear),
+      "EndMonth": Number(EndMonth),
+      "EndDay": Number(EndDay),
+    }, {
+      headers: {
+        'Authorization': 'Bearer your_token',
+        'Content-Type': 'application/json',
+        'auth': await service.GetToken()
+      }
+    });
+
+    return rta.data
+  }
+
   async Create({ amount, reason, description, date}) {
     const rta = await axios.post(this.apiURl + '/money/', {
       "Amount": Number(amount),
