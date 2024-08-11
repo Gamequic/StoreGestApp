@@ -11,14 +11,14 @@ class FoodService {
 
   async Find() {
     const rta = await axios.get(this.apiURl + '/orders/', {
-        headers: {
-            'Authorization': 'Bearer your_token',
-            'Content-Type': 'application/json',
-            'auth': await service.GetToken()
-          }
-        })
-    
-        return rta.data
+      headers: {
+          'Authorization': 'Bearer your_token',
+          'Content-Type': 'application/json',
+          'auth': await service.GetToken()
+        }
+      })
+  
+      return rta.data
   }
 
   async GetRecordByDate(date) {
@@ -63,6 +63,29 @@ class FoodService {
     } catch (error) {
       throw error;
     }
+  }
+
+  async statistics(initDate, endDate) {
+
+    const [ InitYear, InitMonth, InitDay ] = initDate.split("-");
+    const [ EndYear, EndMonth, EndDay ] = endDate.split("-");
+
+    const rta = await axios.post(this.apiURl + '/orders/statistics', {
+      "InitYear": Number(InitYear),
+      "InitMonth": Number(InitMonth),
+      "InitDay": Number(InitDay),
+      "EndYear": Number(EndYear),
+      "EndMonth": Number(EndMonth),
+      "EndDay": Number(EndDay),
+    }, {
+      headers: {
+        'Authorization': 'Bearer your_token',
+        'Content-Type': 'application/json',
+        'auth': await service.GetToken()
+      }
+    });
+  
+    return rta.data
   }
   
 }

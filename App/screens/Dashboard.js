@@ -8,11 +8,13 @@ import inter from "./../../assets/Inter-Medium.ttf";
 import FoodDeck from './../components/FoodDeck';
 
 import MoneyService from './../services/money.service';
+import OrdersService from './../services/orders.service';
 
 import styles from './../style';
 import LANG from './../../lang';
 
 const moneyService = new MoneyService();
+const ordersService = new OrdersService();
 
 function DashboardScreen() {
   const {
@@ -22,6 +24,8 @@ function DashboardScreen() {
   const [ DATA, setDATA ] = useState([]);
   const [ loading, setLoading ] = useState(true);
   const [ current, setCurrent ] = useState(0);
+  const [ ordersNumber, setOrdersNumber ] = useState(0);
+  const [ average, setAverage ] = useState(0);
 
   const dashStyles = {
     container: {
@@ -43,7 +47,7 @@ function DashboardScreen() {
     });
   };
 
-  const updateDashboard = async () => {
+  const updateGraph = async () => {
     try {
       setLoading(true);
   
@@ -68,16 +72,16 @@ function DashboardScreen() {
         const date = datesList[i];
         const foundOrder = daysWithOrders.find(order => order.date === date);
         if (foundOrder) {
-            tempDATA.push({
-                day: index,
-                highTmp: foundOrder.record.Amount
-            });
+          tempDATA.push({
+            day: index,
+            highTmp: foundOrder.record.Amount
+          }); 
         } else {
-            tempDATA.push({
-                day: index,
-                highTmp: 0,
-            });
-        }
+          tempDATA.push({
+            day: index,
+            highTmp: 0,
+          });
+      }
         index++;
     }
       setDATA(tempDATA);
@@ -96,11 +100,24 @@ function DashboardScreen() {
     const LastOne = await moneyService.FindLastOne()
     setCurrent(LastOne.Current)
   }
+
+  const updateOrders = async () => {
+    // Get a list of dates
+    const currentDate = new Date();
+    let datesList = getDates(currentDate, 10);
+
+    // Get the data from the server
+    const data = await ordersService.statistics(datesList[datesList.length - 1], datesList[0]);
+
+    setAverage(data.Average);
+    setOrdersNumber(data.OrdersNumber);
+  }
   
   useFocusEffect(
     useCallback(() => {
-      updateDashboard();
       updateCurrent();
+      updateGraph();
+      updateOrders();
     }, [])
   );
 
@@ -137,8 +154,8 @@ function DashboardScreen() {
           justifyContent: 'space-evenly',
           alignItems: 'center'
         })}>
-          <Text style={[styles.title2, StyleSheet.create({textAlign: 'center', width:'50%'})]}>{LANG[currentLang].OrdersAttended + '\n20'}</Text>
-          <Text style={[styles.title2, StyleSheet.create({textAlign: 'center', width:'50%'})]}>{LANG[currentLang].Average + '\n343.5$'}</Text>
+          <Text style={[styles.title2, StyleSheet.create({textAlign: 'center', width:'50%'})]}>{LANG[currentLang].OrdersAttended + '\n' + ordersNumber}</Text>
+          <Text style={[styles.title2, StyleSheet.create({textAlign: 'center', width:'50%'})]}>{LANG[currentLang].Average + '\n' + average + '$'}</Text>
         </View>
       </View>
     </View>
