@@ -26,6 +26,7 @@ function DashboardScreen() {
   const [ current, setCurrent ] = useState(0);
   const [ ordersNumber, setOrdersNumber ] = useState(0);
   const [ average, setAverage ] = useState(0);
+  const [ productData, setProductData ] = useState(0);
 
   const dashStyles = {
     container: {
@@ -109,6 +110,8 @@ function DashboardScreen() {
     // Get the data from the server
     const data = await ordersService.statistics(datesList[datesList.length - 1], datesList[0]);
 
+    setProductData(data.Products)
+
     setAverage(data.Average);
     setOrdersNumber(data.OrdersNumber);
   }
@@ -144,7 +147,9 @@ function DashboardScreen() {
       </View>
       <View style={ styles.cardF } >
         <Text style={styles.title}>{LANG[currentLang].TheMostSold}</Text>
-        <FoodDeck></FoodDeck>
+        <FoodDeck
+          productData={productData}
+        />
       </View>
       <View style={ styles.cardF } >
         <Text style={styles.title}>{LANG[currentLang].Orders}</Text>

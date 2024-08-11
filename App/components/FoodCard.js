@@ -8,7 +8,7 @@ import FloatingModal from "./FloatingModal";
 
 import LANG from "./../../lang";
 
-function FoodCard ({ ID, screen, style, photo, name, price, isKg, list, setList, callback }) {
+function FoodCard ({ ID, screen, style, photo, name, price, isKg, list, setList, callback, onlyVisual }) {
     const [ floatingModal, setFloatingModal ] = useState(false); 
     const [ amount, setAmount ] = useState(0);
     const navigation = useNavigation();
@@ -22,6 +22,8 @@ function FoodCard ({ ID, screen, style, photo, name, price, isKg, list, setList,
         if ( screen ) {
             return () => {navigation.navigate(screen, { ID });
         }
+        } else if (onlyVisual) {
+            return () => {}
         } else { 
             return () => {setFloatingModal(true);}
         }

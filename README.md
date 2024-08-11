@@ -27,9 +27,9 @@
         * [X] Create
         * [ ] Statistics 🟢
 * [X] Colors 🔴
-* [ ] Backend 🔴
+* [X] Backend 🔴
     * [X] Log in
-    * [ ] Dashboard
+    * [X] Dashboard
     * [X] CRUD products
     * [X] CRUD Orders
     * [X] CRUD Money
