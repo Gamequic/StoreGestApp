@@ -1,10 +1,9 @@
-import React, { useContext, useCallback, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
-import { CartesianChart, Line } from "victory-native";
+import { CartesianChart, Line } from 'victory-native';
 
 import ThemeContext from '../ThemeContext';
-import inter from "./../../assets/Inter-Medium.ttf";
+import inter from './../../assets/Inter-Medium.ttf';
 import FoodDeck from './../components/FoodDeck';
 
 import MoneyService from './../services/money.service';
@@ -17,16 +16,15 @@ const moneyService = new MoneyService();
 const ordersService = new OrdersService();
 
 function DashboardScreen() {
-  const {
-    currentLang, setcurrentLang
-  } = useContext(ThemeContext);
+  const { currentLang } = useContext(ThemeContext);
 
-  const [ DATA, setDATA ] = useState([]);
-  const [ loading, setLoading ] = useState(true);
-  const [ current, setCurrent ] = useState(0);
-  const [ ordersNumber, setOrdersNumber ] = useState(0);
-  const [ average, setAverage ] = useState(0);
-  const [ productData, setProductData ] = useState(0);
+  const [DATA, setDATA] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [current, setCurrent] = useState(0);
+  const [ordersNumber, setOrdersNumber] = useState(0);
+  const [average, setAverage] = useState(0);
+  const [productData, setProductData] = useState([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   const dashStyles = {
     container: {
@@ -39,7 +37,7 @@ function DashboardScreen() {
     leftView: {
       flex: 1,
     },
-  }
+  };
 
   const getDates = (date, days) => {
     return Array.from({ length: days }, (_, i) => {
@@ -51,21 +49,21 @@ function DashboardScreen() {
   const updateGraph = async () => {
     try {
       setLoading(true);
-  
+
       // Get a list of dates
       const currentDate = new Date();
       let datesList = getDates(currentDate, 10);
-  
+
       // Get the data from the server
       const data = await moneyService.GetRecordByDateRange(datesList[datesList.length - 1], datesList[0]);
-  
+
       // Process the data to show on the graph
       let daysWithOrders = data.map((record, index) => ({
         index: index,
         date: formatDate(record.CreatedAt),
-        record: record
+        record: record,
       }));
-  
+
       // Check which dates have orders
       const tempDATA = [];
       let index = 0;
@@ -75,69 +73,77 @@ function DashboardScreen() {
         if (foundOrder) {
           tempDATA.push({
             day: index,
-            highTmp: foundOrder.record.Amount
-          }); 
+            highTmp: foundOrder.record.Amount,
+          });
         } else {
           tempDATA.push({
             day: index,
             highTmp: 0,
           });
-      }
+        }
         index++;
-    }
+      }
       setDATA(tempDATA);
-  
+
     } catch (error) {
-      console.error("Error updating dashboard:", error);
+      console.error('Error updating dashboard:', error);
     } finally {
       setLoading(false);
     }
   };
-  
+
   // Helper function to format the date
   const formatDate = isoString => isoString.split('T')[0];
 
   const updateCurrent = async () => {
-    const LastOne = await moneyService.FindLastOne()
-    setCurrent(LastOne.Current)
-  }
+    try {
+      const LastOne = await moneyService.FindLastOne();
+      setCurrent(LastOne.Current);
+    } catch (error) {
+      console.error('Error updating current:', error);
+    }
+  };
 
   const updateOrders = async () => {
-    // Get a list of dates
-    const currentDate = new Date();
-    let datesList = getDates(currentDate, 10);
+    try {
+      // Get a list of dates
+      const currentDate = new Date();
+      let datesList = getDates(currentDate, 10);
 
-    // Get the data from the server
-    const data = await ordersService.statistics(datesList[datesList.length - 1], datesList[0]);
+      // Get the data from the server
+      const data = await ordersService.statistics(datesList[datesList.length - 1], datesList[0]);
 
-    setProductData(data.Products)
+      setProductData(data.Products);
+      setAverage(data.Average);
+      setOrdersNumber(data.OrdersNumber);
+    } catch (error) {
+      console.error('Error updating orders:', error);
+    }
+  };
 
-    setAverage(data.Average);
-    setOrdersNumber(data.OrdersNumber);
-  }
-  
-  useFocusEffect(
-    useCallback(() => {
-      updateCurrent();
-      updateGraph();
-      updateOrders();
-    }, [])
-  );
+  useEffect(() => {
+    const fetchData = async () => {
+      await Promise.all([updateCurrent(), updateGraph(), updateOrders()]);
+      setDataLoaded(true);
+    };
 
-  if (loading) {
+    fetchData();
+  }, []);
+
+  if (loading || !dataLoaded) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
   return (
-    <View style={ dashStyles.container }>
-      <View style={ styles.cardF } >
-        <Text style={styles.title}>{LANG[currentLang].Amount + ": " + current + "$"}</Text>
+    <View style={dashStyles.container}>
+      <View style={styles.cardF}>
+        <Text style={styles.title}>{LANG[currentLang].Amount + ': ' + current + '$'}</Text>
         <View style={dashStyles.verticalContainer}>
           <CartesianChart
             data={DATA}
             xKey="day"
-            yKeys={["highTmp"]}
-            axisOptions={ inter }
+            yKeys={['highTmp']}
+            axisOptions={inter}
           >
             {({ points }) => (
               <Line points={points.highTmp} color="red" strokeWidth={2.5} />
@@ -145,22 +151,24 @@ function DashboardScreen() {
           </CartesianChart>
         </View>
       </View>
-      <View style={ styles.cardF } >
+      <View style={styles.cardF}>
         <Text style={styles.title}>{LANG[currentLang].TheMostSold}</Text>
-        <FoodDeck
-          productData={productData}
-        />
+        <FoodDeck productData={productData} />
       </View>
-      <View style={ styles.cardF } >
+      <View style={styles.cardF}>
         <Text style={styles.title}>{LANG[currentLang].Orders}</Text>
-        <View style={ StyleSheet.create({
+        <View style={StyleSheet.create({
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-evenly',
-          alignItems: 'center'
+          alignItems: 'center',
         })}>
-          <Text style={[styles.title2, StyleSheet.create({textAlign: 'center', width:'50%'})]}>{LANG[currentLang].OrdersAttended + '\n' + ordersNumber}</Text>
-          <Text style={[styles.title2, StyleSheet.create({textAlign: 'center', width:'50%'})]}>{LANG[currentLang].Average + '\n' + average + '$'}</Text>
+          <Text style={[styles.title2, StyleSheet.create({ textAlign: 'center', width: '50%' })]}>
+            {LANG[currentLang].OrdersAttended + '\n' + ordersNumber}
+          </Text>
+          <Text style={[styles.title2, StyleSheet.create({ textAlign: 'center', width: '50%' })]}>
+            {LANG[currentLang].Average + '\n' + average + '$'}
+          </Text>
         </View>
       </View>
     </View>
