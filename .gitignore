@@ -34,5 +34,6 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-# Build stagg
+# Build things
 .build/
+build/

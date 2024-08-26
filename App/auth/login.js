@@ -27,9 +27,13 @@ function LogIn({ setLogin }) {
   const handleLogIn = async () => {
     setMessage("")
     try {
-      await Service.LogIn({email, password});
+      const rta = await Service.LogIn({email, password});
+      setMessage(String(rta))
       setLogin(true)
     } catch (error) {
+      if (error.message === "Network Error") {
+        setMessage(LANG[currentLang]["CheckInternet"] + "\n" + Service.apiURl + '/auth/login')
+      }
       if (error.message === "Request failed with status code 404") {
         setMessage(LANG[currentLang]["404"])
       }

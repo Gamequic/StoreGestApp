@@ -1,6 +1,7 @@
 const LANG = {
     "ES": {
         "Welcome": "Bienvenido",
+        "CheckInternet": "Revisa tu conexión a internet",
         "User": "Usuario",
         "Password": "Contraseña",
         "Close": "Cerrar",
@@ -42,6 +43,7 @@ const LANG = {
     },
     "US": {
         "Welcome": "Welcome",
+        "CheckInternet": "Check your internet connection",
         "User": "User",
         "Password": "Password",
         "Close": "Close",
