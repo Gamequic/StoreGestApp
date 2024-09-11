@@ -33,13 +33,36 @@
       "package": "com.gamequic.storegestapp",
       "usesCleartextTraffic": true,
       "networkSecurityConfig": "./android/app/src/main/res/xml/network_security_config.xml",
-      "permissions": [ "android.permission.ACCESS_WIFI_STATE", "INTERNET", "android.permission.INTERNET" ]
+      "permissions": [
+        "android.permission.ACCESS_WIFI_STATE",
+        "INTERNET",
+        "android.permission.INTERNET"
+      ],
+      "useNextNotificationsApi": true,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": {
+            "scheme": "http",
+            "host": "192.168.1.168"
+          },
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      ["expo-build-properties", {
+        "android": {
+          "usesCleartextTraffic": true
+        }
+      }]
     ],
     "extra": {
       "eas": {

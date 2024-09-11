@@ -29,7 +29,7 @@ function LogIn({ setLogin }) {
     try {
       const rta = await Service.LogIn({email, password});
       setMessage(String(rta))
-      setLogin(true)
+      // setLogin(true)
     } catch (error) {
       if (error.message === "Network Error") {
         setMessage(LANG[currentLang]["CheckInternet"] + "\n" + Service.apiURl + '/auth/login')

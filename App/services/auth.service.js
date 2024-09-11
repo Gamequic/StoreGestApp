@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 class AuthService {
   constructor() {
     this.apiURl = 'http://192.168.1.236:8080/api';
+    // this.apiURl = 'https://api.escuelajs.co/api/v1/auth/login';
     this.userKey = "userData";
   }
 
@@ -63,11 +64,12 @@ class AuthService {
     console.log("Logging in with data:", body);
 
     try {
-      const rta = await axios.post(this.apiURl + '/auth/login', body);
-      console.log("Login response:", rta);
+      // const rta = await axios.post(this.apiURl + '/auth/login', body);
+      const rta = await axios.post(this.apiURl, body);
 
       await this.SaveUserData({
         token: rta.data.token, // Assuming the token is in rta.data.token
+        // token: rta.data.access_token,
         email,
         password
       });
