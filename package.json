@@ -18,12 +18,15 @@
     "axios": "^1.7.3",
     "base64-js": "^1.5.1",
     "expo": "~51.0.8",
+    "expo-build-properties": "~0.12.5",
     "expo-checkbox": "~3.0.0",
+    "expo-dev-client": "~4.0.22",
     "expo-file-system": "~17.0.1",
     "expo-font": "~12.0.7",
     "expo-image": "~1.12.9",
     "expo-image-picker": "~15.0.5",
     "expo-status-bar": "~1.12.1",
+    "hermes-parser": "^0.23.1",
     "react": "18.2.0",
     "react-native": "0.74.1",
     "react-native-calendars": "^1.1305.0",
@@ -34,8 +37,7 @@
     "react-native-reanimated": "~3.10.1",
     "react-native-svg": "^15.3.0",
     "victory-native": "^41.0.1",
-    "expo-dev-client": "~4.0.22",
-    "expo-build-properties": "~0.12.5"
+    "vlq": "^2.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

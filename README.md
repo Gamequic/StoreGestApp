@@ -1,51 +1,24 @@
-- Permissions
-- Clints tab
-- Products
+# Project Overview:
+The project is a React Native application developed with Expo, an open-source platform for building mobile applications. The app has various features and functionalities that make it user-friendly and efficient in providing the desired services.
 
-# Checklist
+# Project Capabilities:
+This app offers several capabilities to its users, including easy navigation through different screens, interactive UI/UX design, smooth animations, and real-time data updates. It also integrates with third-party APIs for enhanced functionality and user experience.
 
-* [X] Lenguages 🔴
-* [X] Log in 🔴
-* [X] Navigation tab 🔴
-* [ ] Tabs 🔴
-    * [X] Dashboard
-    * [X] Products
-        * [X] Dashboard
-        * [X] Update
-        * [X] Create
-        * [ ] Statistics 🟢
-    * [X] Orders
-        * [X] Dashboard
-        * [X] Record
-        * [X] Update
-        * [X] Create
-        * [ ] Statistics 🟢
-    * [X] Money
-        * [X] Dashboard
-        * [X] Record
-        * [X] Update
-        * [X] Create
-        * [ ] Statistics 🟢
-* [X] Colors 🔴
-* [X] Backend 🔴
-    * [X] Log in
-    * [X] Dashboard
-    * [X] CRUD products
-    * [X] CRUD Orders
-    * [X] CRUD Money
+## Screens Description:
 
-## Flags
-- 🔴 Urgent
-- 🟢 Later
+- Home Screen - This is the main screen of the app where users can find all essential information and links to other screens. The home screen has a clean design, making it easy for users to navigate through the app.
+- Products Screen - A list of products available in the store, each product has its own description, image, and price details. Users can add products to their cart or favorite them for future reference.
+Cart Screen - Displays all items added to the cart, allowing users to edit quantities, remove items, or proceed to checkout. The user will be able to see the total cost of their order before completing the purchase.
+- Checkout Screen - Users can review their order details, enter shipping information, and choose a payment method for secure transaction processing.
+- Account Screen - Users have the option to manage their account settings such as changing passwords, viewing order history, or updating personal information.
+# Technologies Used
+The following technologies were used in developing this application:
 
-It flows like the file system, if backend is 🔴 Urgent, all the child task are 🔴 Urgent, unless it is set as 🟢 Later.
+- React Native: A JavaScript framework for building mobile applications that run on iOS and Android platforms.
+- Expo: An open-source platform for creating and deploying native mobile apps without writing any native code.
+- Node.js: A server-side runtime environment built on Chrome’s V8 JavaScript engine for scalable and efficient web applications.
+- Express.js: A minimalist, flexible Node.js web application framework that provides a robust set of features for building single-page, multi-page, and hybrid web apps.
+- MongoDB: A NoSQL database used for storing and managing the app’s data.
 
-# Notes
-
-Each time it enter to food, it reload all pictures, this more like a backend problem because the photo 
-is on the same endpoint but it is diferrent
-When backend fix this, allow cache use on photos
-
-# We use SemVer to versioning
-
-https://semver.org/spec/v2.0.0.html
+# Licens
+The project is licensed under the MIT License, which allows users to modify, distribute, and use the code as they see fit, subject to certain conditions.
