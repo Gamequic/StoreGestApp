@@ -18,7 +18,6 @@ The following technologies were used in developing this application:
 - Expo: An open-source platform for creating and deploying native mobile apps without writing any native code.
 - Node.js: A server-side runtime environment built on Chrome’s V8 JavaScript engine for scalable and efficient web applications.
 - Express.js: A minimalist, flexible Node.js web application framework that provides a robust set of features for building single-page, multi-page, and hybrid web apps.
-- MongoDB: A NoSQL database used for storing and managing the app’s data.
 
 # Licens
 The project is licensed under the MIT License, which allows users to modify, distribute, and use the code as they see fit, subject to certain conditions.

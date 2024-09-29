@@ -20,7 +20,7 @@ function LogIn({ setLogin }) {
   } = useContext(ThemeContext);
   
   const [ message, setMessage ] = useState("");
-  const [ email, setEmail ] = useState('demiancalleros0@gmail.com');
+  const [ email, setEmail ] = useState('user@fake.com');
   const [ password, setPassword ] = useState('12345678');
   const [ showPassword, setShowPassword ] = useState(false);
 
@@ -28,8 +28,7 @@ function LogIn({ setLogin }) {
     setMessage("")
     try {
       const rta = await Service.LogIn({email, password});
-      setMessage(String(rta))
-      // setLogin(true)
+      setLogin(true)
     } catch (error) {
       if (error.message === "Network Error") {
         setMessage(LANG[currentLang]["CheckInternet"] + "\n" + Service.apiURl + '/auth/login')

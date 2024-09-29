@@ -98,7 +98,11 @@ function DashboardScreen() {
   const updateCurrent = async () => {
     try {
       const LastOne = await moneyService.FindLastOne();
-      setCurrent(LastOne.Current);
+      if (LastOne != 'No data for now') {
+        setCurrent(LastOne.Current);
+      } else {
+        // setCurrent(0);
+      }
     } catch (error) {
       console.error('Error updating current:', error);
     }

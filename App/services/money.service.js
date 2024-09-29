@@ -10,15 +10,21 @@ class MoneyService {
   }
 
   async FindLastOne() {
-    const rta = await axios.get(this.apiURl + '/money/lastOne', {
-      headers: {
-        'Authorization': 'Bearer your_token',
-        'Content-Type': 'application/json',
-        'auth': await service.GetToken()
-      }
-    })
-
-    return rta.data
+    try {
+      const rta = await axios.get(this.apiURl + '/money/lastOne', {
+        headers: {
+          'Authorization': 'Bearer your_token',
+          'Content-Type': 'application/json',
+          'auth': await service.GetToken()
+        }
+      })
+  
+      return rta.data
+    } catch (error) {
+      return {
+        Current: 0
+      };
+    }
   }
 
   async GetRecordByDate(date) {
