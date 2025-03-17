@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, ScrollView } from 'react-native';
 import { CartesianChart, Line } from 'victory-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import ThemeContext from '../ThemeContext';
 import inter from './../../assets/Inter-Medium.ttf';
@@ -8,10 +9,12 @@ import FoodDeck from './../components/FoodDeck';
 
 import MoneyService from './../services/money.service';
 import OrdersService from './../services/orders.service';
+import AuthService from '../services/auth.service';
 
 import styles from './../style';
 import LANG from './../../lang';
 
+const authService = new AuthService();
 const moneyService = new MoneyService();
 const ordersService = new OrdersService();
 
@@ -20,6 +23,7 @@ function DashboardScreen() {
 
   const [DATA, setDATA] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [name, setName] = useState("Username");
   const [current, setCurrent] = useState(0);
   const [ordersNumber, setOrdersNumber] = useState(0);
   const [average, setAverage] = useState(0);
@@ -30,6 +34,11 @@ function DashboardScreen() {
     container: {
       flex: 1,
     },
+    absoluteContainer: {
+      flex: 1,
+      position: "absolute",
+      height: "100%",
+    },
     verticalContainer: {
       flex: 1,
       flexDirection: 'row',
@@ -37,6 +46,10 @@ function DashboardScreen() {
     leftView: {
       flex: 1,
     },
+    deathSpace: {
+      height: "20%",
+      width: "100%"
+    }
   };
 
   const getDates = (date, days) => {
@@ -125,9 +138,13 @@ function DashboardScreen() {
     }
   };
 
+  const GetName = async () => {
+    setName((await authService.GetUserData()).name)
+  }
+
   useEffect(() => {
     const fetchData = async () => {
-      await Promise.all([updateCurrent(), updateGraph(), updateOrders()]);
+      await Promise.all([updateCurrent(), updateGraph(), updateOrders(), GetName()]);
       setDataLoaded(true);
     };
 
@@ -139,43 +156,59 @@ function DashboardScreen() {
   }
 
   return (
-    <View style={dashStyles.container}>
-      <View style={styles.cardF}>
-        <Text style={styles.title}>{LANG[currentLang].Amount + ': ' + current + '$'}</Text>
-        <View style={dashStyles.verticalContainer}>
-          <CartesianChart
-            data={DATA}
-            xKey="day"
-            yKeys={['highTmp']}
-            axisOptions={inter}
-          >
-            {({ points }) => (
-              <Line points={points.highTmp} color="red" strokeWidth={2.5} />
-            )}
-          </CartesianChart>
+    <LinearGradient
+      colors={['#0482d6', '#f0f0f0']}
+      style={[dashStyles.container, StyleSheet.create({backgroundColor: "#f0f0f0"})]}
+    >
+      <View style={dashStyles.container}>
+        <View
+          style={styles.backgroundBlue}
+        >
+          <Text style={[styles.titleWhite, StyleSheet.create({textAlign: "Right", width: "100%", padding: 16,})]}>Dashboad</Text>
+          <Text style={[styles.title2White, StyleSheet.create({textAlign: "Right", width: "100%", padding: 16})]}>Welcome {name}</Text>
         </View>
       </View>
-      <View style={styles.cardF}>
-        <Text style={styles.title}>{LANG[currentLang].TheMostSold}</Text>
-        <FoodDeck productData={productData} />
-      </View>
-      <View style={styles.cardF}>
-        <Text style={styles.title}>{LANG[currentLang].Orders}</Text>
-        <View style={StyleSheet.create({
-          flex: 1,
-          flexDirection: 'row',
-          justifyContent: 'space-evenly',
-          alignItems: 'center',
-        })}>
-          <Text style={[styles.title2, StyleSheet.create({ textAlign: 'center', width: '50%' })]}>
-            {LANG[currentLang].OrdersAttended + '\n' + ordersNumber}
-          </Text>
-          <Text style={[styles.title2, StyleSheet.create({ textAlign: 'center', width: '50%' })]}>
-            {LANG[currentLang].Average + '\n' + average + '$'}
-          </Text>
+      <View
+        style={dashStyles.absoluteContainer}
+      >
+        <View style={dashStyles.deathSpace} />
+        <View style={styles.cardF}>
+          <Text style={styles.title}>{LANG[currentLang].Amount + ': ' + current + '$'}</Text>
+          <View style={dashStyles.verticalContainer}>
+            <CartesianChart
+              data={DATA}
+              xKey="day"
+              yKeys={['highTmp']}
+              axisOptions={inter}
+            >
+              {({ points }) => (
+                <Line points={points.highTmp} color="red" strokeWidth={2.5} />
+              )}
+            </CartesianChart>
+          </View>
+        </View>
+        <View style={styles.cardF}>
+          <Text style={[styles.title, StyleSheet.create({height: "100%"})]}>{LANG[currentLang].TheMostSold}</Text>
+          <FoodDeck productData={productData} />
+        </View>
+        <View style={styles.cardF}>
+          <Text style={styles.title}>{LANG[currentLang].Orders}</Text>
+          <View style={StyleSheet.create({
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+          })}>
+            <Text style={[styles.title2, StyleSheet.create({ textAlign: 'center', width: '50%' })]}>
+              {LANG[currentLang].OrdersAttended + '\n' + ordersNumber}
+            </Text>
+            <Text style={[styles.title2, StyleSheet.create({ textAlign: 'center', width: '50%' })]}>
+              {LANG[currentLang].Average + '\n' + average + '$'}
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 

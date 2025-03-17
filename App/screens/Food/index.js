@@ -2,12 +2,14 @@ import React, { useContext, useState, useCallback } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, View, StyleSheet } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import * as base64 from 'base64-js';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import ThemeContext from './../../ThemeContext';
 
 import FoodCard from './../../components/FoodCard';
 import Button from './../../components/Button';
+
+import LANG from '../../../lang';
 
 import FoodService from './../../services/food.service';
 import PhotoService from './../../services/photos.service';
@@ -42,7 +44,10 @@ function FoodScreen({ navigation }) {
   
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['#0482d6', '#f0f0f0']}
+      style={[styles.container, StyleSheet.create({backgroundColor: "#f0f0f0"})]}
+    >
         <ScrollView contentContainerStyle={StyleSheet.create({
             flexGrow: 1,
             justifyContent: 'flex-start',
@@ -53,6 +58,8 @@ function FoodScreen({ navigation }) {
                     flexDirection: 'row',
                     flexWrap: 'wrap',
                     justifyContent: 'flex-start',
+                    justifyContent: 'center',
+                    padding: 32,
                 })}
             >
               {foodListUx}
@@ -60,12 +67,12 @@ function FoodScreen({ navigation }) {
         </ScrollView>
         <View style={styles.margin}>
           <Button
-            title={'Agregar comida'}
+            title={LANG[currentLang].AddMeal}
             onPress={() => {navigation.navigate('FoodCreate')}}
           />
         </View>
       <StatusBar style="auto" />
-    </View>
+    </LinearGradient>
   );
 }
 

@@ -11,14 +11,14 @@ import LogIn from './auth/login';
 
 export default function App() {
   const [isLogged, setIsLogged] = useState(false);
-  const [currentLang, setCurrentLang] = useState('ES');
+  const [currentLang, setCurrentLang] = useState('US');
   const colorScheme = useColorScheme();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await saveData('Lang', 'ES');
-        const storedLang = await getData('Lang') || 'ES';
+        await saveData('Lang', 'US');
+        const storedLang = await getData('Lang') || 'US';
         setCurrentLang(storedLang);
       } catch (error) {
         console.error('Error fetching data:', error);

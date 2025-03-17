@@ -56,7 +56,8 @@ class AuthService {
       const rta = await axios.post(this.apiURl + '/auth/login', body);
 
       await this.SaveUserData({
-        token: rta.data,
+        token: rta.data.Token,
+        name: rta.data.Name,
         email,
         password
       });

@@ -64,8 +64,6 @@ function FoodCard ({ ID, screen, style, photo, name, price, isKg, list, setList,
     return (
         <View
             style={[StyleSheet.create({
-                width: '50%',
-                padding: 10,
                 justifyContent: 'center',
                 alignItems: 'center',
             }), style]}

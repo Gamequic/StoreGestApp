@@ -82,6 +82,14 @@ function TabNavigator() {
       initialRouteName="Dashboard"
       screenOptions={{
         tabBarActiveTintColor: '#e91e63',
+        tabBarStyle: {
+          backgroundColor: 'transparent',
+          borderTopWidth: 0,
+          elevation: 0,
+          shadowOpacity: 0,
+          // position: 'absolute',
+        },
+        headerShown: false,
       }}
     >
       <NavTab.Screen

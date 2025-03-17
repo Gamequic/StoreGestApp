@@ -139,7 +139,7 @@ function FoodUpdate({ navigation }) {
                 <View style={styles.margin} />
                 <Button onPress={HandleUpdate} title={ LANG[currentLang].UpdateMenu } />
             </View>
-            <Button onPress={HandleDelete} title={ LANG[currentLang].Delete } />
+            <Button onPress={HandleDelete} title={ LANG[currentLang].Delete } type={"Warning"} />
         </View>
     )
 }

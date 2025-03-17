@@ -14,7 +14,13 @@ function FoodDeck ( productData ) {
 
     return (
         <View
-            style={StyleSheet.create({ flex: 1, flexDirection: 'row'})}
+            style={StyleSheet.create({
+                flex: 1,
+                flexDirection: 'row',
+                position: "absolute",
+                transform: [{ translateY: 25 }],
+                zIndex: 2
+            })}
         >
             {
                 secondProduct ? (

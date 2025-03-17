@@ -6,6 +6,7 @@ const LANG = {
         "Password": "Contraseña",
         "Close": "Cerrar",
         "Cancel": "Cancelar",
+        "Continue": "Continuar",
         "Delete": "Borrar",
         "Name": "Nombre",
         "Price": "Precio",
@@ -37,6 +38,7 @@ const LANG = {
         "UpdateOrder": "Actualizar order",
         "AddToMenu": "Añadir al menú",
         "UpdateMenu": "Actualizar el menú",
+        "AreYouSure": "¿Está seguro de que desea realizar esta acción?",
         "TheMostSold": "Lo más vendido",
         "OrdersAttended": "Pedidos atendidos",
         "Average": "Promedio"
@@ -48,6 +50,7 @@ const LANG = {
         "Password": "Password",
         "Close": "Close",
         "Cancel": "Cancel",
+        "Continue": "Continue",
         "Delete": "Delete",
         "Name": "Nombre",
         "Price": "Price",
@@ -79,6 +82,7 @@ const LANG = {
         "UpdateOrder": "Update order",
         "AddToMenu": "Add to menu",
         "UpdateMenu": "Update menu",
+        "AreYouSure": "Are you sure you want to perform this action?",
         "TheMostSold": "The most sold",
         "OrdersAttended": "Orders attended",
         "Average": "Average"

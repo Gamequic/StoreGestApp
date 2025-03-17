@@ -1,14 +1,13 @@
 import { StyleSheet } from "react-native";
-import { Layout } from "react-native-reanimated";
 
 const colors = {
-  background: '#fffff0',
+  background: '#ffffff',
 
   red: "#CE430B",
   green: '#36EC1D',
 
   textInput: '#F9F3ED',
-  button: '#DE925A',
+  button: '#7597a1',
 
   desert1: '#e9ac6d',
   desert2: '#eec185',
@@ -20,6 +19,13 @@ const colors = {
 }
 
 const styles = StyleSheet.create({
+    backgroundBlue: {
+      backgroundColor: "#0482d6",
+      height: "40%",
+      width: "100%",
+      alignItems: 'center',
+      position: "absolute",
+    },
     container: {
       flex: 1,
       backgroundColor: colors.background,
@@ -46,7 +52,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     card: {
-      backgroundColor: colors.desert5,
+      backgroundColor: "#ccd6db",
       borderRadius: 12,
       padding: 4,
       margin: colors.margin,
@@ -63,13 +69,12 @@ const styles = StyleSheet.create({
       elevation: 16, // Android
     },
     cardF: {
-      backgroundColor: colors.desert5,
+      backgroundColor: "#e1ecf2",
       borderRadius: 12,
       padding: 4,
-      margin: colors.margin,
+      margin: colors.margin*6,
       alignItems: 'center',
       justifyContent: 'center',
-      margin: colors.margin,
       shadowColor: "purple",
       shadowOffset: {
         width: 6,
@@ -112,6 +117,15 @@ const styles = StyleSheet.create({
       elevation: 3,
       backgroundColor: colors.button,
     },
+    buttonWarning: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 12,
+      paddingHorizontal: 32,
+      borderRadius: 4,
+      elevation: 3,
+      backgroundColor: colors.red,
+    },
     buttonBigRed: {
       alignItems: 'center',
       justifyContent: 'center',
@@ -146,6 +160,10 @@ const styles = StyleSheet.create({
     },
     title2: {
       fontSize: 24
+    },
+    title2White: {
+      fontSize: 24,
+      color: 'white'
     },
     title: {
       fontSize: 32
